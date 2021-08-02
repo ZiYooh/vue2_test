@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import CorpInfo from '@/components/CorpInfo';
 import VuetifyTest from '@/components/VuetifyTest';
-import Grid from '@/components/Grid';
+import ConnTest from '@/components/ConnTest';
 import Candidate from '@/components/Candidate';
 
 Vue.use(Router);
@@ -26,9 +26,9 @@ export default new Router({
       component: VuetifyTest,
     },
     {
-      path: '/grid',
-      name: 'Grid',
-      component: Grid,
+      path: '/conntest',
+      name: 'ConnTest',
+      component: ConnTest,
     },
     {
       path: '/candidate',
