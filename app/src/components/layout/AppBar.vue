@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar absolute dense color="#788387" dark>
+    <v-app-bar absolute dense color="#0c1512" dark>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>블록체인 투표 시스템</v-app-bar-title>
       <v-spacer></v-spacer>
