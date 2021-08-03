@@ -1,51 +1,131 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-            Name
-          </th>
-          <th class="text-left">
-            Calories
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in candidates"
-          :key="item.name"
-        >
-          <td>{{ item.name }}</td>
-          <td>{{ item.vote }}</td>
-        </tr>
-      </tbody>
-      <v-text-field
-        v-model="search"
-        label="후보자 입력"
-        single-line
-        hide-details>
-      </v-text-field>
-      <v-btn
-        class="ma-2"
-        :loading="loading"
-        :disabled="loading"
-        color="secondary"
-        @click="loader = 'loading'"
-      >
-        투표하기
-      </v-btn>
-            <v-btn
-        class="ma-2"
-        :loading="loading2"
-        :disabled="loading2"
-        color="info"
-        @click="loader = 'loading2'"
-      >
-        해당 투표 블록체인 정보 확인
-      </v-btn>
-    </template>
-  </v-simple-table>
+    <v-content class="mx-15 mt-15">
+        <v-simple-table>
+            <template v-slot:default>
+                <thead>
+                    <tr>
+                        <th class="text-left">
+                            후보자
+                        </th>
+                        <th class="text-left">
+                            득표수
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in candidates" :key="item.name">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.vote }}</td>
+                    </tr>
+                </tbody>
+                <v-text-field
+                    v-model="search"
+                    label="후보자 입력"
+                    single-line="single-line"
+                    hide-details="hide-details"></v-text-field>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading"
+                    :disabled="loading"
+                    color="secondary"
+                    @click="loader = 'loading'">
+                    투표하기
+                </v-btn>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading2"
+                    :disabled="loading2"
+                    color="info"
+                    @click="loader = 'loading2'">
+                    해당 투표 블록체인 정보 확인
+                </v-btn>
+            </template>
+        </v-simple-table>
+
+                <v-simple-table>
+            <template v-slot:default>
+                <thead>
+                    <tr>
+                        <th class="text-left">
+                            후보자
+                        </th>
+                        <th class="text-left">
+                            득표수
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in candidates" :key="item.name">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.vote }}</td>
+                    </tr>
+                </tbody>
+                <v-text-field
+                    v-model="search"
+                    label="후보자 입력"
+                    single-line="single-line"
+                    hide-details="hide-details"></v-text-field>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading"
+                    :disabled="loading"
+                    color="secondary"
+                    @click="loader = 'loading'">
+                    투표하기
+                </v-btn>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading2"
+                    :disabled="loading2"
+                    color="info"
+                    @click="loader = 'loading2'">
+                    해당 투표 블록체인 정보 확인
+                </v-btn>
+            </template>
+        </v-simple-table>
+
+                <v-simple-table>
+            <template v-slot:default>
+                <thead>
+                    <tr>
+                        <th class="text-left">
+                            후보자
+                        </th>
+                        <th class="text-left">
+                            득표수
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in candidates" :key="item.name">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.vote }}</td>
+                    </tr>
+                </tbody>
+                <v-text-field
+                    v-model="search"
+                    label="후보자 입력"
+                    single-line="single-line"
+                    hide-details="hide-details"></v-text-field>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading"
+                    :disabled="loading"
+                    color="secondary"
+                    @click="loader = 'loading'">
+                    투표하기
+                </v-btn>
+                <v-btn
+                    class="ma-2"
+                    :loading="loading2"
+                    :disabled="loading2"
+                    color="info"
+                    @click="loader = 'loading2'">
+                    해당 투표 블록체인 정보 확인
+                </v-btn>
+            </template>
+        </v-simple-table>
+    </v-content>
 </template>
 
 <script>
@@ -56,12 +136,10 @@ export default {
         {
           name: '후보1',
           vote: 0,
-        },
-        {
+        }, {
           name: '후보2',
           vote: 0,
-        },
-        {
+        }, {
           name: '후보3',
           vote: 0,
         },
@@ -88,40 +166,40 @@ export default {
 </script>
 
 <style>
-  .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
-  }
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
+    .custom-loader {
+        animation: loader 1s infinite;
+        display: flex;
     }
-    to {
-      transform: rotate(360deg);
+    @-moz-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-  }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
+    @-webkit-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-    to {
-      transform: rotate(360deg);
+    @-o-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-  }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
+    @keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 </style>
