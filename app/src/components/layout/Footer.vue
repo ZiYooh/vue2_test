@@ -1,5 +1,5 @@
 <template>
-  <v-footer app dark padless>
+  <v-footer app dark absolute padless>
       <v-card tile color="#FFFFFF" dark center class="white--text text-center" width="100%">
         <v-card-text>
           <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
