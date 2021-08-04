@@ -2,23 +2,23 @@
   <div>
     <v-app-bar absolute dense flat color="#0c1512" dark>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-btn text>
+      <v-btn to="/" text>
         블록체인 투표 시스템
       </v-btn>
       <v-spacer></v-spacer>
     <v-app-bar-items class="hidden-sm-and-down">
-      <v-btn text>
+      <v-btn to="/notice" text>
         공지사항
       </v-btn>
       <v-divider vertical></v-divider>
-      <v-btn text>
+      <v-btn to="/candidate" text>
         진행중인 투표
       </v-btn>
       <v-btn text>
         종료된 투표
       </v-btn>
       <v-divider vertical></v-divider>
-      <v-btn text>
+      <v-btn to="/help" text>
         고객센터
       </v-btn>
     </v-app-bar-items>
@@ -43,11 +43,15 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
+          <v-list-item to="/">
+            <v-list-item-title>홈</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/notice">
             <v-list-item-title>공지사항</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item to="/candidate">
             <v-list-item-title>진행중인 투표</v-list-item-title>
           </v-list-item>
 
@@ -55,7 +59,7 @@
             <v-list-item-title>종료된 투표</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item to="/help">
             <v-list-item-title>고객 센터</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
@@ -70,6 +74,9 @@ export default {
     return {
       drawer: false,
     };
+  },
+  methods: {
+
   },
 };
 </script>
