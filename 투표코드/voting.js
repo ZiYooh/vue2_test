@@ -74,3 +74,5 @@ window.addEventListener("load", function() {
   }
   App.start();
 });
+
+export default voting
