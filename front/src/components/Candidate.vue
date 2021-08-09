@@ -14,8 +14,10 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in candidates" :key="item.name">
+                        <!--
                         <td>{{ item.name }}</td>
                         <td>{{ item.vote }}</td>
+                        -->
                     </tr>
                 </tbody>
                 <v-text-field
@@ -71,7 +73,7 @@
 
 <script>
 import Web3 from 'web3';
-import votingArtifact from "../../../build/contracts/Voting";
+import votingArtifact from "../../../build/contracts/Voting.json";
 
 const { web3 } = this;
 
