@@ -73,7 +73,6 @@
 
 <script>
 import Web3 from 'web3';
-import votingArtifact from "../../../build/contracts/Voting.json";
 
 const { web3 } = this;
 
