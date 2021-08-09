@@ -100,6 +100,11 @@ export default {
       loading5: false,
     };
   },
+  async mounted() {
+    this.contractInstance = this.$web3.eth.contract(this.$config.VOTE_ABI).at(this.$config.VOTE_CA);
+    this.account = await this.$getDefaultAccount();
+  },
+
   methods: {
     votefor1() {
       alert('Vote1했음니다');
