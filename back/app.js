@@ -38,4 +38,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, (err) => {
+  if (err) return console.error(err)
+  console.log('mongoose connected!')
+})
+
 module.exports = app;
