@@ -80,18 +80,6 @@ const { web3 } = this;
 export default {
   data() {
     return {
-      candidates: [
-        {
-          name: '후보1',
-          vote: 0,
-        }, {
-          name: '후보2',
-          vote: 0,
-        }, {
-          name: '후보3',
-          vote: 0,
-        },
-      ],
       loader: null,
       loading: false,
       loading2: false,
@@ -115,6 +103,15 @@ export default {
     votefor3() {
 
     },
+
+    async loadCandidatsAndVotes() {
+
+    },
+
+    async voteForCandidate() {
+
+    },
+
   },
   watch: {
     loader() {
