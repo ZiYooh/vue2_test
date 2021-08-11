@@ -86,6 +86,11 @@ export default {
       loading3: false,
       loading4: false,
       loading5: false,
+      account: '',
+      contractInstance: null,
+      selectedOption: null,
+      options: [],
+      results: [],
     };
   },
   async mounted() {
@@ -103,15 +108,66 @@ export default {
     votefor3() {
 
     },
-
-    async loadCandidatsAndVotes() {
-
+    showVoteModal() {
+      this.getOptions()
+      
+      this.$refs.modalVote.show()
     },
 
-    async voteForCandidate() {
+    showTotalResult() {
+      this.getTotalVotes()
 
+      this.$refs.modalTotal.show()
     },
 
+    getOptions() {
+      this.options = []
+      this.contractInstance.getOptionList({}, (err, result) => {        
+        for(let key in result){
+          this.options.push(this.$web3.toAscii(result[key]))
+        }        
+      })
+    },
+
+    getTotalVotes() {
+      this.results = []
+      this.contractInstance.getOptionList({}, (err, result) => {        
+        for(let key in result){
+          const option = this.$web3.toAscii(result[key])
+          this.contractInstance.totalVotesFor(option, {}, (err, result) => {            
+            this.results.push({'title': option, 'count': result.toNumber()})
+          })
+        }
+      })
+    },
+
+    handleChooseOption() {    
+      if(!this.selectedOption){
+        alert("please select a option")
+        return
+      }
+      this.contractInstance.voting(this.selectedOption, {from: this.account, gas: this.$config.GAS_AMOUNT}, (error, transactionHash) => {     
+            console.log("txhash",transactionHash)            
+        })
+      this.watchVoted((error, result) => {
+        if(!error) alert("Vote completed...!")
+      })
+    },
+
+    async watchVoted(cb) {
+      const currentBlock = await this.getCurrentBlock()
+      const eventWatcher = this.contractInstance.VoteCompleted({}, {fromBlock: currentBlock - 1, toBlock: 'latest'})
+      eventWatcher.watch(cb)
+    },
+
+    getCurrentBlock() {
+      return new Promise((resolve, reject ) => {
+        this.$web3.eth.getBlockNumber((err, blocknumber) => {
+            if(!err) resolve(blocknumber)
+            reject(err)
+        })
+      })
+    },
   },
   watch: {
     loader() {
