@@ -7,6 +7,7 @@ import ConnTest from '@/components/ConnTest';
 import Candidate from '@/components/Candidate';
 import Notice from '@/components/Notice';
 import Help from '@/components/Help';
+import E404 from '@/components/E404';
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld,
+    },
+    {
+      path: '*',
+      name: 'E404',
+      component: E404,
     },
     {
       path: '/corp',
