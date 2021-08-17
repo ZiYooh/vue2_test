@@ -1,81 +1,60 @@
 <template>
-    <v-content class="mx-15 mt-15">
-        <v-simple-table>
-            <template v-slot:default>
-                <thead>
-                    <tr>
-                        <th class="text-left">
-                            후보자
-                        </th>
-                        <th class="text-left">
-                            득표수
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in candidates" :key="item.name">
-                        <!--
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.vote }}</td>
-                        -->
-                    </tr>
-                </tbody>
-                <v-text-field
-                    v-model="search"
-                    label="후보자 입력"
-                    single-line="single-line"
-                    hide-details="hide-details"></v-text-field>
-                <v-btn
-                    class="ma-2"
-                    :loading="loading"
-                    :disabled="loading"
-                    color="secondary"
-                    @click="loader = 'loading'">
-                    투표하기
-                </v-btn>
-                <v-btn
-                    class="ma-2"
-                    :loading="loading2"
-                    :disabled="loading2"
-                    color="info"
-                    @click="loader = 'loading2'">
-                    해당 투표 블록체인 정보 확인
-                </v-btn>
-                <v-btn
-                    class="ma-2"
-                    :loading="loading3"
-                    :disabled="loading3"
-                    color="#E0F2F1"
-                    @click="loader = 'loading3'"
-                    v-on:click="votefor1">
-                    후보1 투표
-                </v-btn>
-                <v-btn
-                    class="ma-2"
-                    :loading="loading4"
-                    :disabled="loading4"
-                    color="#E0F2F1"
-                    @click="loader = 'loading4'">
-                    후보2 투표
-                </v-btn>
-                <v-btn
-                    class="ma-2"
-                    :loading="loading5"
-                    :disabled="loading5"
-                    color="#E0F2F1"
-                    @click="loader = 'loading5'">
-                    후보3 투표
-                </v-btn>
-            </template>
-        </v-simple-table>
-    </v-content>
+  <v-content class="mx-16 mt-14 px-16">
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">
+              후보자
+            </th>
+            <th class="text-left">
+              득표수
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(option, index) in results"
+              :key="index">
+            <td>{{option.title}}</td>
+            <td>{{option.count}}</td>
+          </tr>
+        </tbody>
+        <v-btn class="ma-2" :loading="loading2" :disabled="loading2" color="info" @click="loader = 'loading2'">
+          해당 투표 블록체인 정보 확인
+        </v-btn>
+        <v-dialog v-model="dialog" scrollable max-width="300px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+              투표 창 열기
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>후보자 선택</v-card-title>
+            <v-divider></v-divider>
+            <v-card-text style="height: 300px;">
+              <v-radio-group v-model="dialogm1" column>
+                <v-radio label="후보1" value="후보1"></v-radio>
+                <v-radio label="후보2" value="후보2"></v-radio>
+                <v-radio label="후보3" value="후보3"></v-radio>
+              </v-radio-group>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                닫기
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                투표
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </template>
+    </v-simple-table>
+  </v-content>
 </template>
 
 <script>
-import Web3 from 'web3';
-
-const { web3 } = this;
-
 
 export default {
   data() {
@@ -91,6 +70,8 @@ export default {
       selectedOption: null,
       options: [],
       results: [],
+      dialogm1: '',
+      dialog: false,
     };
   },
   async mounted() {
@@ -99,27 +80,6 @@ export default {
   },
 
   methods: {
-    votefor1() {
-      alert('Vote1했음니다');
-    },
-    votefor2() {
-
-    },
-    votefor3() {
-
-    },
-    showVoteModal() {
-      this.getOptions()
-      
-      this.$refs.modalVote.show()
-    },
-
-    showTotalResult() {
-      this.getTotalVotes()
-
-      this.$refs.modalTotal.show()
-    },
-
     getOptions() {
       this.options = []
       this.contractInstance.getOptionList({}, (err, result) => {        

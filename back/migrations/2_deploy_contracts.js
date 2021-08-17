@@ -1,5 +1,5 @@
-const Voting = artifacts.require("Voting");
-
-module.exports = function(deployer) {
-  deployer.deploy(Voting, ['후보1', '후보2', '후보3'].map(name => web3.utils.asciiToHex(name)));
+var Vote = artifacts.require("./Vote.sol");
+module.exports = function(deployer) {  
+  var options = ['Option1', 'Option2', 'Option3', 'Option4', 'Option5']
+  deployer.deploy(Vote, options.map(name => web3.utils.asciiToHex(name)));
 };
