@@ -75,8 +75,24 @@ export default {
     };
   },
   async mounted() {
-    this.contractInstance = this.$web3.eth.contract(this.$config.VOTE_ABI).at(this.$config.VOTE_CA);
+    console.log('mounted 시작입니다');
+    console.log(this.$config.VOTE_ABI);
+    console.log(this.$config.VOTE_CA);
+    this.contractInstance = new this.$web3.eth.Contract(this.$config.VOTE_ABI, this.$config.VOTE_CA);
+    console.log('contractInstance까지 가져왔슴');
+    console.log(this.contractInstance);
     this.account = await this.$getDefaultAccount();
+    console.log('getDefaultAccount 했습');
+    console.log(this.account);
+    this.options = [];
+    console.log('options넣기전');
+    console.log(this.contractInstance.methods.getOptionList());
+    this.contractInstance.methods.getOptionList({}, (err, result) => {        
+      for(let key in result){
+        this.options.push(this.$web3.toAscii(result[key]))
+      }        
+    });
+    console.log('options넣은후');
   },
 
   methods: {

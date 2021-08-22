@@ -1,8 +1,8 @@
-const Voting = require('./contracts/Vote.json');
+const Vote = require('./contracts/Vote.json');
 
 export default {
-  VOTING_CA: '0x08b43b62297b3ba8ce3f3c3d4beeae3071bbf9f7',
-  VOTING_ABI: Voting.abi,
+  VOTE_CA: '0x7FE6B38408cB048bCc457d2024A89aeA6F176C3b',
+  VOTE_ABI: Vote.abi,
 
   GAS_AMOUNT: 500000,
 };
