@@ -27,6 +27,9 @@
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
               투표 창 열기
             </v-btn>
+            <v-btn to="/conntest">
+              테스트페이지로
+            </v-btn>
           </template>
           <v-card>
             <v-card-title>후보자 선택</v-card-title>
@@ -86,63 +89,65 @@ export default {
     console.log(this.account);
     this.options = [];
     console.log('options넣기전');
-    console.log(this.contractInstance.methods.getOptionList());
-    this.contractInstance.methods.getOptionList({}, (err, result) => {        
-      for(let key in result){
-        this.options.push(this.$web3.toAscii(result[key]))
-      }        
+    console.log(this.options);
+    this.contractInstance.methods.getOptionList().call({}, (err, result) => {
+      console.log('이건 리절트 다 ' + result);
+      for (const key in result) {
+        this.options.push(this.$web3.toAscii(result[key]));
+      }
     });
     console.log('options넣은후');
+    console.log(this.options);
   },
 
   methods: {
     getOptions() {
-      this.options = []
-      this.contractInstance.getOptionList({}, (err, result) => {        
-        for(let key in result){
-          this.options.push(this.$web3.toAscii(result[key]))
-        }        
-      })
+      this.options = [];
+      this.contractInstance.getOptionList({}, (err, result) => {
+        for (const key in result) {
+          this.options.push(this.$web3.toAscii(result[key]));
+        }
+      });
     },
 
     getTotalVotes() {
-      this.results = []
-      this.contractInstance.getOptionList({}, (err, result) => {        
-        for(let key in result){
-          const option = this.$web3.toAscii(result[key])
-          this.contractInstance.totalVotesFor(option, {}, (err, result) => {            
-            this.results.push({'title': option, 'count': result.toNumber()})
-          })
+      this.results = [];
+      this.contractInstance.getOptionList({}, (err, result) => {
+        for (const key in result) {
+          const option = this.$web3.toAscii(result[key]);
+          this.contractInstance.totalVotesFor(option, {}, (err, result) => {
+            this.results.push({ title: option, count: result.toNumber() });
+          });
         }
-      })
+      });
     },
 
-    handleChooseOption() {    
-      if(!this.selectedOption){
-        alert("please select a option")
-        return
+    handleChooseOption() {
+      if (!this.selectedOption) {
+        alert('please select a option');
+        return;
       }
-      this.contractInstance.voting(this.selectedOption, {from: this.account, gas: this.$config.GAS_AMOUNT}, (error, transactionHash) => {     
-            console.log("txhash",transactionHash)            
-        })
+      this.contractInstance.voting(this.selectedOption, { from: this.account, gas: this.$config.GAS_AMOUNT }, (error, transactionHash) => {
+        console.log('txhash', transactionHash);
+      });
       this.watchVoted((error, result) => {
-        if(!error) alert("Vote completed...!")
-      })
+        if (!error) alert('Vote completed...!');
+      });
     },
 
     async watchVoted(cb) {
-      const currentBlock = await this.getCurrentBlock()
-      const eventWatcher = this.contractInstance.VoteCompleted({}, {fromBlock: currentBlock - 1, toBlock: 'latest'})
-      eventWatcher.watch(cb)
+      const currentBlock = await this.getCurrentBlock();
+      const eventWatcher = this.contractInstance.VoteCompleted({}, { fromBlock: currentBlock - 1, toBlock: 'latest' });
+      eventWatcher.watch(cb);
     },
 
     getCurrentBlock() {
-      return new Promise((resolve, reject ) => {
+      return new Promise((resolve, reject) => {
         this.$web3.eth.getBlockNumber((err, blocknumber) => {
-            if(!err) resolve(blocknumber)
-            reject(err)
-        })
-      })
+          if (!err) resolve(blocknumber);
+          reject(err);
+        });
+      });
     },
   },
   watch: {

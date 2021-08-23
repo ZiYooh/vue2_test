@@ -2,6 +2,11 @@
   <div>
     <v-app-bar absolute dense flat color="#0c1512" dark>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-img
+      max-height="40"
+      max-width="35"
+      :src="require('@/assets/icon_eth.png')" >
+      </v-img>
       <v-btn to="/" text>
         블록체인 투표 시스템
       </v-btn>
