@@ -2,14 +2,13 @@
   <div>
     <v-app-bar absolute dense flat color="#0c1512" dark>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <router-link to="/">
       <v-img
-      max-height="40"
-      max-width="35"
-      :src="require('@/assets/icon_eth.png')" >
+      max-height="235"
+      max-width="235"
+      :src="require('@/assets/main_logo1.png')" >
       </v-img>
-      <v-btn to="/" text>
-        블록체인 투표 시스템
-      </v-btn>
+    </router-link>
       <v-spacer></v-spacer>
     <v-app-bar-items class="hidden-sm-and-down">
       <v-btn to="/notice" text>
