@@ -4,8 +4,8 @@
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <router-link to="/">
       <v-img
-      max-height="235"
-      max-width="235"
+      max-height="210"
+      max-width="210"
       :src="require('@/assets/main_logo1.png')" >
       </v-img>
     </router-link>
