@@ -7,6 +7,8 @@ import ConnTest from '@/components/ConnTest';
 import Candidate from '@/components/Candidate';
 import Notice from '@/components/Notice';
 import Help from '@/components/Help';
+import FAQ from '@/components/FAQ';
+import QNA from '@/components/QNA';
 import E404 from '@/components/E404';
 
 Vue.use(Router);
@@ -52,6 +54,16 @@ export default new Router({
       path: '/help',
       name: 'Help',
       component: Help,
+    },
+    {
+      path: '/faq',
+      name: 'FAQ',
+      component: FAQ,
+    },
+    {
+      path: '/qna',
+      name: 'QNA',
+      component: QNA,
     },
   ],
 });
