@@ -1,33 +1,25 @@
 <template>
   <v-app id="app">
-    <v-btn color="success">Success</v-btn>
-    <v-btn color="error">Error</v-btn>
-    <v-btn color="warning">Warning</v-btn>
-    <v-btn color="info">Info</v-btn>
-    <v-card elevation="2" loading outlined shaped>
-      <v-card-title>
-        <span v-text="title" />
-        <v-spacer></v-spacer>
-        <v-btn @click="$emit('action-btn:clicked')">
-          Action
-        </v-btn>
-      </v-card-title>
-      <v-card-text>
-        <slot />
-      </v-card-text>
-    </v-card>
+  <v-card
+    class="mx-auto my-12"
+    max-width="374"
+  >
+    <v-card-title>카드 제목 1</v-card-title>
+    <v-card-text>
+    </v-card-text>
+      테스트 입니다 1
+    <v-divider class="mx-4"></v-divider>
+
+    <v-card-title>카드 제목 2</v-card-title>
+    <v-card-text>
+      테스트 입니다 2
+    </v-card-text>
+  </v-card>
   </v-app>
 </template>
 
 <script>
-export default {
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-};
+
 </script>
 
 <style>
