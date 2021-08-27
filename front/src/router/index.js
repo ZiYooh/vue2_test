@@ -9,6 +9,7 @@ import Notice from '@/components/Notice';
 import Help from '@/components/Help';
 import FAQ from '@/components/FAQ';
 import QNA from '@/components/QNA';
+import Endvote from '@/components/Endvote';
 import E404 from '@/components/E404';
 
 Vue.use(Router);
@@ -64,6 +65,11 @@ export default new Router({
       path: '/qna',
       name: 'QNA',
       component: QNA,
+    },
+    {
+      path: '/endvote',
+      name: 'Endvote',
+      component: Endvote,
     },
   ],
 });

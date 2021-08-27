@@ -18,7 +18,7 @@
       <v-btn to="/candidate" text>
         진행중인 투표
       </v-btn>
-      <v-btn text>
+      <v-btn to="/endvote" text>
         종료된 투표
       </v-btn>
       <v-divider vertical></v-divider>
@@ -59,7 +59,7 @@
             <v-list-item-title>진행중인 투표</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item to="/endvote">
             <v-list-item-title>종료된 투표</v-list-item-title>
           </v-list-item>
 
