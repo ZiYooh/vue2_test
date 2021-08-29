@@ -6,13 +6,35 @@
   >
     <v-card-title>카드 제목 1</v-card-title>
     <v-card-text>
-    </v-card-text>
       {{func1}} {{func3}}
+    </v-card-text>
+
     <v-divider class="mx-4"></v-divider>
 
     <v-card-title>카드 제목 2</v-card-title>
     <v-card-text>
       {{func2}}
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
+
+    <v-card-title>여기서부터 후보자 랜더링 하겠습니다</v-card-title>
+    <v-card-text>
+      대충 들어갈 곳<br>
+      {{options}}
+      {{this.$web3.utils.toAscii(options[0])}}
+      {{this.$web3.utils.toAscii(options[1])}}
+      {{this.$web3.utils.toAscii(options[2])}}
+      {{this.$web3.utils.toAscii(options[3])}}
+      {{this.$web3.utils.toAscii(options[4])}}
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
+
+    <v-card-title>여기서부터 득표수 랜더링 하겠습니다</v-card-title>
+    <v-card-text>
+      대충 들어갈 곳2
+      {{results}}
     </v-card-text>
   </v-card>
       <v-simple-table>
@@ -45,9 +67,12 @@
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
               <v-radio-group v-model="dialogm1" column>
-                <v-radio label="후보1" value="후보1"></v-radio>
-                <v-radio label="후보2" value="후보2"></v-radio>
-                <v-radio label="후보3" value="후보3"></v-radio>
+                <v-radio
+                  v-for="item in options"
+                  v-bind:key="item"
+                  :label="`${item}`"
+                  >
+                </v-radio>
               </v-radio-group>
             </v-card-text>
             <v-divider></v-divider>
@@ -101,6 +126,8 @@ export default {
     console.log(this.func1);
     console.log(this.func2);
     console.log(this.func3);
+    this.options = (await this.contractInstance.methods.getOptionList().call());
+    this.results = (await this.contractInstance.methods.totalVotesFor().call());
   },
 };
 </script>
