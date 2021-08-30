@@ -34,7 +34,7 @@
     <v-card-title>여기서부터 득표수 랜더링 하겠습니다</v-card-title>
     <v-card-text>
       대충 들어갈 곳2
-      {{results}}
+      {{votes}}
     </v-card-text>
   </v-card>
       <v-simple-table>
@@ -50,10 +50,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(option, index) in results"
-              :key="index">
-            <td>{{option.title}}</td>
-            <td>{{option.count}}</td>
+          <tr
+            v-for="item in optionsAscii"
+            v-bind:key="item"
+          >
+            <td>{{item}}</td>
           </tr>
         </tbody>
         <v-dialog v-model="dialog" scrollable max-width="300px">
@@ -68,7 +69,7 @@
             <v-card-text style="height: 300px;">
               <v-radio-group v-model="dialogm1" column>
                 <v-radio
-                  v-for="item in options"
+                  v-for="item in optionsAscii"
                   v-bind:key="item"
                   :label="`${item}`"
                   >
@@ -92,6 +93,8 @@
 </template>
 
 <script>
+let i;
+
 export default {
   data() {
     return {
@@ -102,32 +105,43 @@ export default {
       func3: null,
       dialog: false,
       options: [],
-      results: [],
+      optionsAscii: [],
+      votes: [],
     };
   },
 
   async mounted() {
     console.log('mounted 시작입니다');
-    console.log(this.$config.HELLO_ABI);
-    console.log(this.$config.HELLO_CA);
+    //console.log(this.$config.HELLO_ABI);
+    //console.log(this.$config.HELLO_CA);
     this.contractInstance = new this.$web3.eth.Contract(this.$config.HELLO_ABI, this.$config.HELLO_CA);
-    console.log('contractInstance까지 가져왔슴');
-    console.log(this.contractInstance);
+    //console.log('contractInstance까지 가져왔슴');
+    //console.log(this.contractInstance);
     this.account = await this.$getDefaultAccount();
-    console.log('getDefaultAccount 했습');
-    console.log(this.account);
-    console.log('함수시작하겟음');
-    console.log(await this.contractInstance.methods.getSomeValue().call());
+    //console.log('getDefaultAccount 했습');
+    //console.log(this.account);
+    //console.log('함수시작하겟음');
     this.func1 = await this.contractInstance.methods.getSomeValue().call();
-    console.log(await this.contractInstance.methods.whoIsOwner().call());
     this.func2 = await this.contractInstance.methods.whoIsOwner().call();
-    console.log(await this.contractInstance.methods.helloWorld().call());
     this.func3 = await this.contractInstance.methods.helloWorld().call();
-    console.log(this.func1);
-    console.log(this.func2);
-    console.log(this.func3);
     this.options = (await this.contractInstance.methods.getOptionList().call());
-    this.results = (await this.contractInstance.methods.totalVotesFor().call());
+    //this.votes = (await this.contractInstance.methods.totalVotesFor().call());
+    console.log(this.options.length);
+    console.log('For문 돌아가는지 확인하기');
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.optionsAscii[i] = this.$web3.utils.toAscii(this.options[i]);
+    }
+    console.log('For문 확인끝');
+    console.log('득표수 확인가능한지');
+    console.log(await this.contractInstance.methods.totalVotesFor(this.options[0]).call());
+    console.log('득표수 확인끝');
+    console.log('득표수 배열에넣겠습니다');
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.votes[i] = await this.contractInstance.methods.totalVotesFor(this.options[i]).call();
+    }
+    console.log('득표수 배열에넣기끝');
   },
 };
 </script>

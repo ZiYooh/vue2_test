@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Web3 from "web3";
 import votingArtifact from "../../build/contracts/Voting.json";
 

@@ -77,6 +77,7 @@ export default {
       dialog: false,
     };
   },
+  /*
   async mounted() {
     console.log('mounted 시작입니다');
     console.log(this.$config.VOTE_ABI);
@@ -150,6 +151,7 @@ export default {
       });
     },
   },
+  */
   watch: {
     loader() {
       const l = this.loader;
