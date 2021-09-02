@@ -10,6 +10,7 @@
       </v-img>
     </router-link>
       <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
     <v-app-bar-items class="hidden-sm-and-down">
       <v-btn to="/notice" text>
         공지사항
@@ -28,7 +29,32 @@
     </v-app-bar-items>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
     <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon color="white" v-bind="attrs" v-on="on">
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
+            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+    </v-menu>
+        <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon color="white" v-bind="attrs" v-on="on">
+            <v-icon>mdi-arrow-up-bold-box-outline</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
+            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+    </v-menu>
+        <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon color="white" v-bind="attrs" v-on="on">
             <v-icon>mdi-account</v-icon>
@@ -65,6 +91,10 @@
 
           <v-list-item to="/help">
             <v-list-item-title>고객 센터</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/board">
+            <v-list-item-title>게시판테스트</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>

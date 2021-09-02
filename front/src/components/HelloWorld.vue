@@ -19,7 +19,7 @@
           justify="center"
         >
           <div class="text-h2">
-            {{ slide }} Slide
+            {{ slide }}
           </div>
         </v-row>
       </v-sheet>
@@ -39,11 +39,11 @@ export default {
         'deep-purple accent-4',
       ],
       slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
+        '대충',
+        '투표홍보배너',
+        '들어가는',
+        '슬라이드',
+        '이다',
       ],
     };
   },

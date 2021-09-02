@@ -50,11 +50,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="item in optionsAscii"
-            v-bind:key="item"
-          >
-            <td>{{item}}</td>
+          <tr v-for="(option, index) in results"
+              :key="index">
+            <td>{{option.title}}</td>
+            <td>{{option.count}}</td>
           </tr>
         </tbody>
         <v-dialog v-model="dialog" scrollable max-width="300px">
@@ -107,6 +106,7 @@ export default {
       options: [],
       optionsAscii: [],
       votes: [],
+      results: [],
     };
   },
 
@@ -132,6 +132,9 @@ export default {
       console.log(i);
       this.optionsAscii[i] = this.$web3.utils.toAscii(this.options[i]);
     }
+    for (i = 0; i < this.options.length; i++) {
+      this.optionsAscii[i] = this.optionsAscii[i].replace(/\0/g, ''); // 문자열 뒤에 Null문자(\u0000) 제거
+    }
     console.log('For문 확인끝');
     console.log('득표수 확인가능한지');
     console.log(await this.contractInstance.methods.totalVotesFor(this.options[0]).call());
@@ -140,8 +143,15 @@ export default {
     for (i = 0; i < this.options.length; i++) {
       console.log(i);
       this.votes[i] = await this.contractInstance.methods.totalVotesFor(this.options[i]).call();
+      console.log(this.votes[i]);
     }
     console.log('득표수 배열에넣기끝');
+    console.log('결과 객채에 후보, 투표수 넣겠습니다');
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.results.push({ title: this.optionsAscii[i], count: this.votes[i] });
+      console.log(this.results[i]);
+    }
   },
 };
 </script>

@@ -13,22 +13,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(option, index) in results"
-              :key="index">
-            <td>{{option.title}}</td>
-            <td>{{option.count}}</td>
+          <tr
+            v-for="item in results"
+            v-bind:key="item"
+          >
+            <td>{{item.title}}</td>
+            <td>{{item.count}}</td>
           </tr>
         </tbody>
         <v-btn class="ma-2" :loading="loading2" :disabled="loading2" color="info" @click="loader = 'loading2'">
           해당 투표 블록체인 정보 확인
         </v-btn>
+        <v-btn color="info" v-on:click="voteForOption">
+          1번에 투표
+        </v-btn>
+        <v-btn to="/conntest">
+          테스트페이지로
+        </v-btn>
         <v-dialog v-model="dialog" scrollable max-width="300px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
               투표 창 열기
-            </v-btn>
-            <v-btn to="/conntest">
-              테스트페이지로
             </v-btn>
           </template>
           <v-card>
@@ -36,9 +41,12 @@
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
               <v-radio-group v-model="dialogm1" column>
-                <v-radio label="후보1" value="후보1"></v-radio>
-                <v-radio label="후보2" value="후보2"></v-radio>
-                <v-radio label="후보3" value="후보3"></v-radio>
+                <v-radio
+                  v-for="item in results"
+                  v-bind:key="item"
+                  :label="`${item.title}`"
+                >
+                </v-radio>
               </v-radio-group>
             </v-card-text>
             <v-divider></v-divider>
@@ -58,100 +66,60 @@
 </template>
 
 <script>
+let i;
 
 export default {
   data() {
     return {
-      loader: null,
-      loading: false,
-      loading2: false,
-      loading3: false,
-      loading4: false,
-      loading5: false,
       account: '',
       contractInstance: null,
-      selectedOption: null,
-      options: [],
-      results: [],
-      dialogm1: '',
+      func1: null,
+      func2: null,
+      func3: null,
       dialog: false,
+      options: [],
+      optionsAscii: [],
+      votes: [],
+      results: [],
     };
   },
-  /*
+
   async mounted() {
-    console.log('mounted 시작입니다');
-    console.log(this.$config.VOTE_ABI);
-    console.log(this.$config.VOTE_CA);
-    this.contractInstance = new this.$web3.eth.Contract(this.$config.VOTE_ABI, this.$config.VOTE_CA);
-    console.log('contractInstance까지 가져왔슴');
-    console.log(this.contractInstance);
+    this.contractInstance = new this.$web3.eth.Contract(this.$config.HELLO_ABI, this.$config.HELLO_CA);
     this.account = await this.$getDefaultAccount();
-    console.log('getDefaultAccount 했습');
-    console.log(this.account);
-    this.options = [];
-    console.log('options넣기전');
-    console.log(this.options);
-    this.contractInstance.methods.getOptionList().call({}, (err, result) => {
-      console.log('이건 리절트 다 ' + result);
-      for (const key in result) {
-        this.options.push(this.$web3.toAscii(result[key]));
-      }
-    });
-    console.log('options넣은후');
-    console.log(this.options);
+    this.options = (await this.contractInstance.methods.getOptionList().call());
+
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.optionsAscii[i] = this.$web3.utils.toAscii(this.options[i]);
+    }
+    for (i = 0; i < this.options.length; i++) {
+      this.optionsAscii[i] = this.optionsAscii[i].replace(/\0/g, ''); // 문자열 뒤에 Null문자(\u0000) 제거
+    }
+
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.votes[i] = await this.contractInstance.methods.totalVotesFor(this.$web3.utils.asciiToHex(this.optionsAscii[i])).call();
+      console.log(this.votes[i]);
+    }
+    for (i = 0; i < this.options.length; i++) {
+      console.log(i);
+      this.results.push({ title: this.optionsAscii[i], count: this.votes[i] });
+      console.log(this.results[i]);
+    }
   },
 
   methods: {
-    getOptions() {
-      this.options = [];
-      this.contractInstance.getOptionList({}, (err, result) => {
-        for (const key in result) {
-          this.options.push(this.$web3.toAscii(result[key]));
-        }
-      });
-    },
-
-    getTotalVotes() {
-      this.results = [];
-      this.contractInstance.getOptionList({}, (err, result) => {
-        for (const key in result) {
-          const option = this.$web3.toAscii(result[key]);
-          this.contractInstance.totalVotesFor(option, {}, (err, result) => {
-            this.results.push({ title: option, count: result.toNumber() });
-          });
-        }
-      });
-    },
-
-    handleChooseOption() {
-      if (!this.selectedOption) {
-        alert('please select a option');
-        return;
-      }
-      this.contractInstance.voting(this.selectedOption, { from: this.account, gas: this.$config.GAS_AMOUNT }, (error, transactionHash) => {
-        console.log('txhash', transactionHash);
-      });
-      this.watchVoted((error, result) => {
-        if (!error) alert('Vote completed...!');
-      });
-    },
-
-    async watchVoted(cb) {
-      const currentBlock = await this.getCurrentBlock();
-      const eventWatcher = this.contractInstance.VoteCompleted({}, { fromBlock: currentBlock - 1, toBlock: 'latest' });
-      eventWatcher.watch(cb);
-    },
-
-    getCurrentBlock() {
-      return new Promise((resolve, reject) => {
-        this.$web3.eth.getBlockNumber((err, blocknumber) => {
-          if (!err) resolve(blocknumber);
-          reject(err);
-        });
-      });
+    async voteForOption() {
+      await this.contractInstance.methods.voting(this.$web3.utils.asciiToHex(this.optionsAscii[0])).send({ gas: 140000, from: this.account });
+      console.log(this.options[0]);
+      console.log(this.optionsAscii[0]);
+      console.log('1번에투표햇당');
+      console.log(await this.contractInstance.methods.totalVotesFor(this.$web3.utils.asciiToHex(this.optionsAscii[0])).call());
+      this.$router.go();
     },
   },
-  */
+
   watch: {
     loader() {
       const l = this.loader;

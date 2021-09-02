@@ -13,11 +13,9 @@ contract Hello {
     }
     
     function voting(bytes32 option) public {
-        require(uservotes[msg.sender]=='');
+        //require(uservotes[msg.sender]=='');
         uservotes[msg.sender] = option;
         votes[option] += 1;
-
-
     }
 
     function totalVotesFor(bytes32 option) view public returns (uint8) {
