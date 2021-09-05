@@ -114,7 +114,7 @@ export default {
         alert('대상을 선택해 주세요');
         return;
       }
-      await this.contractInstance.methods.voting(this.$web3.utils.asciiToHex(this.picked)).send({ gas: 140000, from: this.account });
+      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 140000, from: this.account });
       this.$router.go();
     },
   },
