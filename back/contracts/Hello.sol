@@ -7,7 +7,7 @@ contract Hello {
     string[] public optionList;
     mapping (address => string) public uservotes;
     mapping (string => uint8) public votes;
-    mapping (address => uint8) public vote_or_not;
+    mapping (address => uint8) public vote_or_not; // 0 = 투표 안했음 1 = 해당 투표 이미 했음
 
     constructor(string[] memory options) public { 
         owner = msg.sender; 
@@ -33,6 +33,7 @@ contract Hello {
                 return true;
             }
             */
+            // String 형식에서 문자열 비교하기
             if (keccak256(abi.encodePacked(optionList[i])) == keccak256(abi.encodePacked(option))) {
                 return true;
             }
@@ -44,6 +45,7 @@ contract Hello {
         return optionList;
     }
     
+    // 중복투표 여부 확인
     function isVoted(address user) public view returns (bool) {
         if(vote_or_not[user] == 1){
             return true;
