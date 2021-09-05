@@ -1,7 +1,7 @@
 const Hello = require('./contracts/Hello.json');
 
 export default {
-  HELLO_CA: '0x969cC9618B1C732638e164A6E4E81D8e76246270',
+  HELLO_CA: '0xE4aA731C18321e0651bE4BBDceAF2Be99e7316E2',
   HELLO_ABI: Hello.abi,
 
   GAS_AMOUNT: 500000,

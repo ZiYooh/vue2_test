@@ -26,7 +26,6 @@
       {{this.$web3.utils.toAscii(options[1])}}
       {{this.$web3.utils.toAscii(options[2])}}
       {{this.$web3.utils.toAscii(options[3])}}
-      {{this.$web3.utils.toAscii(options[4])}}
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>

@@ -11,6 +11,7 @@ import FAQ from '@/components/FAQ';
 import QNA from '@/components/QNA';
 import Endvote from '@/components/Endvote';
 import Board from '@/components/Board';
+import VoteList from '@/components/VoteList';
 import E404 from '@/components/E404';
 
 Vue.use(Router);
@@ -71,6 +72,11 @@ export default new Router({
       path: '/endvote',
       name: 'Endvote',
       component: Endvote,
+    },
+    {
+      path: '/votelist',
+      name: 'VoteList',
+      component: VoteList,
     },
     {
       path: '/board',

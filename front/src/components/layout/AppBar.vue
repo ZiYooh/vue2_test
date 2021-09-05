@@ -16,7 +16,7 @@
         공지사항
       </v-btn>
       <v-divider vertical></v-divider>
-      <v-btn to="/candidate" text>
+      <v-btn to="/votelist" text>
         진행중인 투표
       </v-btn>
       <v-btn to="/endvote" text>
@@ -81,7 +81,7 @@
             <v-list-item-title>공지사항</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/candidate">
+          <v-list-item to="/votelist">
             <v-list-item-title>진행중인 투표</v-list-item-title>
           </v-list-item>
 
