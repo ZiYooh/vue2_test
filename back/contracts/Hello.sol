@@ -1,42 +1,56 @@
-pragma solidity >=0.4.21 <0.7.0; 
+pragma solidity >=0.4.21 <0.7.0;
+pragma experimental ABIEncoderV2;
 
 contract Hello { 
 	address public owner; // public 으로 선언하여 자동 getter 생성 
     
-    bytes32[] public optionList;
-    mapping (address => bytes32) public uservotes;
-    mapping (bytes32 => uint8) public votes;
+    string[] public optionList;
+    mapping (address => string) public uservotes;
+    mapping (string => uint8) public votes;
+    mapping (address => uint8) public vote_or_not;
 
-    constructor(bytes32[] memory options) public { 
+    constructor(string[] memory options) public { 
         owner = msg.sender; 
         optionList = options;
     }
     
-    function voting(bytes32 option) public {
+    function voting(string memory option) public {
         //require(uservotes[msg.sender]=='');
         uservotes[msg.sender] = option;
         votes[option] += 1;
+        vote_or_not[msg.sender] = 1;
     }
 
-    function totalVotesFor(bytes32 option) view public returns (uint8) {
+    function totalVotesFor(string memory option) view public returns (uint8) {
         require(validOption(option));
         return votes[option];
     }
 
-    function validOption(bytes32 option) view public returns (bool) {
+    function validOption(string memory option) view public returns (bool) {
         for(uint i = 0; i < optionList.length; i++) {
+            /*
             if (optionList[i] == option) {
                 return true;
             }
+            */
+            if (keccak256(abi.encodePacked(optionList[i])) == keccak256(abi.encodePacked(option))) {
+                return true;
+            }
         }
-
         return false;
     }
 
-    function getOptionList() public view returns(bytes32[] memory options) {
+    function getOptionList() public view returns(string[] memory options) {
         return optionList;
     }
     
+    function isVoted(address user) public view returns (bool) {
+        if(vote_or_not[user] == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // 아래는 테스트용 함수들 이다
     function getSomeValue() public pure returns (uint256 value){ 

@@ -24,9 +24,6 @@
         <v-btn class="ma-2" :loading="loading2" :disabled="loading2" color="info" @click="loader = 'loading2'">
           해당 투표 블록체인 정보 확인
         </v-btn>
-        <v-btn color="info" v-on:click="voteForOption">
-          1번에 투표
-        </v-btn>
         <v-btn to="/conntest">
           테스트페이지로
         </v-btn>
@@ -40,11 +37,12 @@
             <v-card-title>후보자 선택</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <v-radio-group v-model="dialogm1" column>
+              <v-radio-group v-model="picked" column>
                 <v-radio
                   v-for="item in results"
                   v-bind:key="item"
                   :label="`${item.title}`"
+                  :value="`${item.title}`"
                 >
                 </v-radio>
               </v-radio-group>
@@ -54,7 +52,7 @@
               <v-btn color="blue darken-1" text @click="dialog = false">
                 닫기
               </v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">
+              <v-btn color="blue darken-1" text @click="dialog = false" v-on:click="voteForOption()">
                 투표
               </v-btn>
             </v-card-actions>
@@ -81,6 +79,7 @@ export default {
       optionsAscii: [],
       votes: [],
       results: [],
+      picked: null,
     };
   },
 
@@ -88,18 +87,18 @@ export default {
     this.contractInstance = new this.$web3.eth.Contract(this.$config.HELLO_ABI, this.$config.HELLO_CA);
     this.account = await this.$getDefaultAccount();
     this.options = (await this.contractInstance.methods.getOptionList().call());
-
     for (i = 0; i < this.options.length; i++) {
       console.log(i);
-      this.optionsAscii[i] = this.$web3.utils.toAscii(this.options[i]);
+      this.optionsAscii[i] = this.$web3.utils.hexToUtf8(this.options[i]);
     }
+    /*
     for (i = 0; i < this.options.length; i++) {
       this.optionsAscii[i] = this.optionsAscii[i].replace(/\0/g, ''); // 문자열 뒤에 Null문자(\u0000) 제거
     }
-
+    */
     for (i = 0; i < this.options.length; i++) {
       console.log(i);
-      this.votes[i] = await this.contractInstance.methods.totalVotesFor(this.$web3.utils.asciiToHex(this.optionsAscii[i])).call();
+      this.votes[i] = await this.contractInstance.methods.totalVotesFor(this.$web3.utils.utf8ToHex(this.optionsAscii[i])).call();
       console.log(this.votes[i]);
     }
     for (i = 0; i < this.options.length; i++) {
@@ -111,11 +110,11 @@ export default {
 
   methods: {
     async voteForOption() {
-      await this.contractInstance.methods.voting(this.$web3.utils.asciiToHex(this.optionsAscii[0])).send({ gas: 140000, from: this.account });
-      console.log(this.options[0]);
-      console.log(this.optionsAscii[0]);
-      console.log('1번에투표햇당');
-      console.log(await this.contractInstance.methods.totalVotesFor(this.$web3.utils.asciiToHex(this.optionsAscii[0])).call());
+      if (!this.picked) {
+        alert('대상을 선택해 주세요');
+        return;
+      }
+      await this.contractInstance.methods.voting(this.$web3.utils.asciiToHex(this.picked)).send({ gas: 140000, from: this.account });
       this.$router.go();
     },
   },
