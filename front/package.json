@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "chart.js": "^3.5.1",
     "vue": "^2.5.2",
     "vue-chart.js": "^0.2.0",
     "vue-router": "^3.0.1",
