@@ -1,6 +1,11 @@
 <template>
   <v-app class="mt-15">
     <h1>블럭정보 테스트 페이지</h1>
+    {{blockinfo[0]}}
+    <v-spacer></v-spacer>
+    {{blockinfo[1]}}
+    <v-spacer></v-spacer>
+    {{blockinfo[2]}}
   </v-app>
 </template>
 
@@ -17,6 +22,7 @@ export default {
       votes: [],
       results: [],
       lastblocknum: null,
+      blockinfo: [],
     };
   },
   created() {
@@ -45,7 +51,7 @@ export default {
     console.log('마지막블록넘버');
     console.log(this.lastblocknum);
     for (i = 0; i < this.lastblocknum; i++){
-      console.log(await this.$web3.eth.getBlock(i));
+      this.blockinfo[i] = await this.$web3.eth.getBlock(i);
     }
   },
 };
