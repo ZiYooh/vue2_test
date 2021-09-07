@@ -44,6 +44,9 @@ export default {
     this.lastblocknum = await this.$web3.eth.getBlockNumber();
     console.log('마지막블록넘버');
     console.log(this.lastblocknum);
+    for (i = 0; i < this.lastblocknum; i++){
+      console.log(await this.$web3.eth.getBlock(i));
+    }
   },
 };
 </script>
