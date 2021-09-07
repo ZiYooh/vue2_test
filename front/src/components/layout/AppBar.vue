@@ -37,8 +37,12 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          <v-list-item to="/userlist">
+            <v-list-item-title>회원 리스트</v-list-item-title>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item to="/userlistcomp">
+            <v-list-item-title>기업 리스트</v-list-item-title>
           </v-list-item>
         </v-list>
     </v-menu>
@@ -49,8 +53,15 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          <v-list-item to="/profile">
+            <v-list-item-title>회원 정보</v-list-item-title>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item to="/profilecomp">
+            <v-list-item-title>기업 정보</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/makevote">
+            <v-list-item-title>투표 개설 신청(기업용)</v-list-item-title>
           </v-list-item>
         </v-list>
     </v-menu>
@@ -61,8 +72,24 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          <v-list-item to="/login">
+            <v-list-item-title>로그인</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/candidate">
+            <v-list-item-title>로그아웃</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/register">
+            <v-list-item-title>일반 회원가입</v-list-item-title>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item to="/logincomp">
+            <v-list-item-title>기업용 로그인</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/candidate">
+            <v-list-item-title>기업용 로그아웃</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/registercomp">
+            <v-list-item-title>기업 회원가입</v-list-item-title>
           </v-list-item>
         </v-list>
     </v-menu>

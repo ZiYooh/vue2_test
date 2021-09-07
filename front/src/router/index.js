@@ -13,6 +13,15 @@ import Endvote from '@/components/Endvote';
 import Board from '@/components/Board';
 import VoteList from '@/components/VoteList';
 import E404 from '@/components/E404';
+import Login from '@/components/jayoon/Login';
+import Logincomp from '@/components/jayoon/Logincomp';
+import MakeVote from '@/components/jayoon/MakeVote';
+import Register from '@/components/jayoon/Register';
+import Registercomp from '@/components/jayoon/Registercomp';
+import Profile from '@/components/jayoon/Profile';
+import UserList from '@/components/jayoon/UserList';
+import Profilecomp from '@/components/jayoon/Profilecomp';
+import UserListcomp from '@/components/jayoon/UserListcomp';
 
 Vue.use(Router);
 
@@ -83,5 +92,51 @@ export default new Router({
       name: 'Board',
       component: Board,
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
+      path: '/logincomp',
+      name: 'Logincomp',
+      component: Logincomp,
+    },
+    {
+      path: '/makevote',
+      name: 'MakeVote',
+      component: MakeVote,
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
+    },
+    {
+      path: '/registercomp',
+      name: 'Registercomp',
+      component: Registercomp,
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+    },
+    {
+      path: '/userlist',
+      name: 'UserList',
+      component: UserList,
+    },
+    {
+      path: '/profilecomp',
+      name: 'Profilecomp',
+      component: Profilecomp,
+    },
+    {
+      path: '/userlistcomp',
+      name: 'UserListcomp',
+      component: UserListcomp,
+    },
+
   ],
 });
