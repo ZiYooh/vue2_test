@@ -2,10 +2,6 @@
   <v-app class="mt-15">
     <h1>블럭정보 테스트 페이지</h1>
     {{blockinfo[0]}}
-    <v-spacer></v-spacer>
-    {{blockinfo[1]}}
-    <v-spacer></v-spacer>
-    {{blockinfo[2]}}
   </v-app>
 </template>
 
@@ -30,6 +26,8 @@ export default {
   },
   async mounted() {
     console.log('Mounted 시작');
+    console.log(this.$config.HELLO_CA);
+    console.log(this.$config.HELLO_ABI);
     this.contractInstance = new this.$web3.eth.Contract(this.$config.HELLO_ABI, this.$config.HELLO_CA);
     this.account = await this.$getDefaultAccount();
     this.options = (await this.contractInstance.methods.getOptionList().call());
@@ -50,9 +48,6 @@ export default {
     this.lastblocknum = await this.$web3.eth.getBlockNumber();
     console.log('마지막블록넘버');
     console.log(this.lastblocknum);
-    for (i = 0; i < this.lastblocknum; i++){
-      this.blockinfo[i] = await this.$web3.eth.getBlock(i);
-    }
   },
 };
 </script>
