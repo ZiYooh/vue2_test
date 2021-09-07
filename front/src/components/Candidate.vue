@@ -21,7 +21,7 @@
             <td>{{item.count}}</td>
           </tr>
         </tbody>
-        <v-btn class="ma-2" :loading="loading2" :disabled="loading2" color="info" @click="loader = 'loading2'">
+        <v-btn color="info" to="/blockinfo">
           해당 투표 블록체인 정보 확인
         </v-btn>
         <v-btn to="/conntest">
@@ -60,13 +60,28 @@
         </v-dialog>
       </template>
     </v-simple-table>
+    <v-container class="grey lighten-5">
+    <v-row>
+      <bar-chart :chart-data="dataCollection"></bar-chart>
+      <v-spacer></v-spacer>
+      <pie-chart :chart-data="dataCollection2"></pie-chart>
+    </v-row>
+    </v-container>
   </v-content>
 </template>
 
 <script>
+import BarChart from './charts/BarChart.vue';
+import PieChart from './charts/PieChart.vue';
+
 let i;
 
 export default {
+  components: {
+    BarChart,
+    PieChart,
+  },
+
   data() {
     return {
       account: '',
@@ -80,9 +95,13 @@ export default {
       votes: [],
       results: [],
       picked: null,
+      dataCollection: null,
+      dataCollection2: null,
     };
   },
-
+  created() {
+    
+  },
   async mounted() {
     this.contractInstance = new this.$web3.eth.Contract(this.$config.HELLO_ABI, this.$config.HELLO_CA);
     this.account = await this.$getDefaultAccount();
@@ -106,6 +125,7 @@ export default {
       this.results.push({ title: this.optionsAscii[i], count: this.votes[i] });
       console.log(this.results[i]);
     }
+    this.fillData();
   },
 
   methods: {
@@ -116,6 +136,32 @@ export default {
       }
       await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 140000, from: this.account });
       this.$router.go();
+    },
+
+    fillData() {
+      this.dataCollection = {
+        labels: this.optionsAscii,
+        datasets: [
+          {
+            label: '투표수',
+            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            data: this.votes,
+          },
+        ],
+      };
+      console.log('ChartTestMain', this.dataCollection);
+      
+      this.dataCollection2 = {
+        labels: this.optionsAscii,
+        datasets: [
+          {
+            borderWidth: 5,
+            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            data: this.votes,
+          },
+        ],
+      };
+      console.log('ChartTestMain', this.dataCollection2);
     },
   },
 
