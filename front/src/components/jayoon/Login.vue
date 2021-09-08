@@ -1,26 +1,36 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 mt-5 mx-auto">
-				<form v-on:submit.prevent="login">
-					<h1 class="h3 mb-3 font-weight-normal">
+  <v-main>
+    <v-row>
+      <v-col md="6" class="mt-5 mx-auto">
+        <v-form v-on:submit.prevent="login">
+          <h1 class="h3 mb-3 font-weight-normal">
 						Please Sign In
 					</h1>
-					<div class="form-group">
-						<label for="email">Email Address</label>
-						<input type="email" v-model="email" class="form-control" name="email" placeholder="Enter Your Email Address" />
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" v-model="password" class="form-control" name="password" placeholder="Enter Your password" />
-					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">
-						Sign In
-					</button>
-				</form>
-			</div>
-		</div>
-	</div>
+          <v-item-group>
+            <label for="email">Email Address</label>
+            <v-text-field
+              type="email"
+              v-model="email"
+              class="form-control"
+              name="email"
+              label="Enter Your Email Address"></v-text-field>
+            </v-item-group>
+          <v-item-group>
+            <label for="password">Password</label>
+            <v-text-field
+              type="password"
+              v-model="password"
+              class="form-control"
+              name="password"
+              label="Enter Your password"></v-text-field> 
+          </v-item-group>
+          <v-btn large block color="primary" type="submit">
+            Sign In
+          </v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-main>
 </template>
 
 <script>
@@ -52,7 +62,7 @@ export default {
             this.password = '';
             this.emitMethod();// 이거를 성공했을 때만 emit하도록해야함
           }
-          router.push({ name: 'Home' });
+          router.push({ name: 'HelloWorld' });
         })
         .catch((err) => {
           console.log(err);

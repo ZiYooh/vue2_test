@@ -1,96 +1,82 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 mt-5 mx-auto">
-        <form v-on:submit.prevent="register">
+  <v-main>
+    <v-row>
+      <v-col md="6" class="mt-5 mx-auto">
+        <v-form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">
-            Register An Account
-          </h1>
-          <div class="form-group">
+						Register An Account
+					</h1>
+          <v-item-group>
             <label for="firstName">성</label>
-            <input
+            <v-text-field
               type="text"
               v-model="firstName"
               class="form-control"
               name="firstName"
-              placeholder="First Name"
-            />
-          </div>
-          <div class="form-group">
+              label="First Name"></v-text-field>
+            </v-item-group>
+          <v-item-group>
             <label for="lastName">이름</label>
-            <input
+            <v-text-field
               type="text"
               v-model="lastName"
               class="form-control"
               name="lastName"
-              placeholder="Last Name"
-            />
-          </div>
-          <div class="form-group">
+              label="Last Name"></v-text-field> 
+          </v-item-group>
+          <v-item-group>
             <label for="email">이메일</label>
-            <input
+            <v-text-field
               type="email"
               v-model="email"
               class="form-control"
               name="email"
-              placeholder="Enter Your Email Address"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">비밀번호</label>
-            <input
+              label="Enter Your Email Address"></v-text-field> 
+          </v-item-group>
+          <v-item-group>
+            <label for="email">비밀번호</label>
+            <v-text-field
               type="password"
               v-model="password"
               class="form-control"
               name="password"
-              placeholder="Enter Your password"
-            />
-          </div>
-
-          <div class="form-group">
-            <br />
-            <label for="sex">성별</label>
-            <br />
-            <input type="radio" id="male" value="남" v-model="sex" />
-            <label for="sex">남</label>
-            <br />
-            <input type="radio" id="female" value="여" v-model="sex" />
-            <label for="sex">여</label>
-            <br />
-          </div>
-          <div class="form-group">
-            <br />
-            <label for="location">지역</label>
-            <br />
-            <select v-model="location">
-              <option disabled value="">지역을 선택하세요</option>
-              <option>서울</option>
-              <option>부산</option>
-              <option>대구</option>
-              <option>인천</option>
-              <option>광주</option>
-              <option>대전</option>
-              <option>울산</option>
-              <option>세종</option>
-              <option>제주</option>
-              <option>경기</option>
-              <option>강원</option>
-              <option>충북</option>
-              <option>충남</option>
-              <option>경북</option>
-              <option>경남</option>
-              <option>전북</option>
-              <option>전남</option>
-            </select>
-          </div>
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+              label="Enter Your password"></v-text-field> 
+          </v-item-group>
+          <label>성별</label>
+          <v-radio-group
+            v-model="sex">
+            <v-radio
+              id="male"
+              :value="남"
+            >
+              <template v-slot:label>
+                <div><strong>남</strong></div>
+              </template>
+            </v-radio>
+            <v-radio
+              id="female"
+              :value="여"
+            >
+              <template v-slot:label>
+                <div><strong>여</strong></div>
+              </template>
+            </v-radio>
+          </v-radio-group>
+          <label for="location">지역</label>
+          <v-select
+            v-model="location"
+            :items="locations_list"
+            placeholder="지역을 선택하세요"
+            prepend-icon="mdi-map"
+            outlined
+          ></v-select>
+          <v-btn large block color="primary" type="submit">
             Register Now
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
+          </v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-main>
 </template>
 
 <script>
@@ -106,6 +92,8 @@ export default {
       password: "",
       sex: "",
       location: "",
+      locations_list: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종',
+                  '제주', '경기', '강원', '충북', '충남', '경북', '경남', '전북', '전남'],
     };
   },
   methods: {

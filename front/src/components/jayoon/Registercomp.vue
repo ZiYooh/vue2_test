@@ -1,59 +1,54 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 mt-5 mx-auto">
-        <form v-on:submit.prevent="registercomp">
+  <v-main>
+    <v-row>
+      <v-col md="6" class="mt-5 mx-auto">
+        <v-form v-on:submit.prevent="registercomp">
           <h1 class="h3 mb-3 font-weight-normal">
-            Register As Company
-          </h1>
-          <div class="form-group">
+						Register As Company
+					</h1>
+          <v-item-group>
             <label for="compName">기업명</label>
-            <input
+            <v-text-field
               type="text"
               v-model="compName"
               class="form-control"
               name="compName"
-              placeholder="기업명"
-            />
-          </div>
-          <div class="form-group">
+              label="기업명"></v-text-field>
+            </v-item-group>
+          <v-item-group>
             <label for="compNum">사업자등록번호</label>
-            <input
+            <v-text-field
               type="text"
               v-model="compNum"
               class="form-control"
               name="compNum"
-              placeholder="사업자등록번호"
-            />
-          </div>
-          <div class="form-group">
+              label="사업자등록번호"></v-text-field> 
+          </v-item-group>
+          <v-item-group>
             <label for="email">이메일</label>
-            <input
+            <v-text-field
               type="email"
               v-model="email"
               class="form-control"
               name="email"
-              placeholder="이메일을 입력하세요"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">비밀번호</label>
-            <input
+              label="이메일을 입력하세요"></v-text-field> 
+          </v-item-group>
+          <v-item-group>
+            <label for="email">비밀번호</label>
+            <v-text-field
               type="password"
               v-model="password"
               class="form-control"
               name="password"
-              placeholder="비밀번호를 입력하세요"
-            />
-          </div>
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+              label="Enter Your password"></v-text-field> 
+          </v-item-group>
+          <v-btn large block color="primary" type="submit">
             지금 등록하기
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
+          </v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-main>
 </template>
 
 <script>
@@ -79,7 +74,7 @@ export default {
           password: this.password,
         })
         .then(() => {
-          router.push({ name: "Login" });
+          router.push({ name: "Logincomop" });
         })
         .catch((err) => {
           console.log(err);

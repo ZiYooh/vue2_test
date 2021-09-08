@@ -1,32 +1,34 @@
 <template>
-	<div class="container">
-		<div class="jumbotron mt-5">
-			<div class="col-sm-8 mx-auto">
-				<h1 class="text-center">My Profile</h1>
-			</div>
-
-			<table class="table col-md-6 mt-5 mx-auto">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">기업명</th>
-						<td scope="col">{{ compName }}</td>
-					</tr>
-				</thead>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">기업번호</th>
-						<td scope="col">{{ compNum }}</td>
-					</tr>
-				</thead>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">이메일</th>
-						<td scope="col">{{ email }}</td>
-					</tr>
-                </thead>
-			</table>
-		</div>
-	</div>
+  <v-main>
+    <v-row>
+      <v-col md="6" class="mt-5 mx-auto">
+        <v-card
+          elevation="2"
+          outlined
+        >
+          <v-card-title class="text-center">My Profile</v-card-title>
+          <v-simple-table>
+            <template v-slot:default>
+              <tbody>
+                <tr>
+                  <td>기업명</td>
+                  <td>{{ compName }}</td>
+                </tr>
+                <tr>
+                  <td>기업번호</td>
+                  <td>{{ compNum }}</td>
+                </tr>
+                <tr>
+                  <td>이메일</td>
+                  <td>{{ email }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-main>
 </template>
 
 <script>
