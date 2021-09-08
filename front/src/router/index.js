@@ -22,6 +22,9 @@ import Profile from '@/components/jayoon/Profile';
 import UserList from '@/components/jayoon/UserList';
 import Profilecomp from '@/components/jayoon/Profilecomp';
 import UserListcomp from '@/components/jayoon/UserListcomp';
+import NowVote from '@/components/voteComponent/NowVote';
+import VoterInfo from '@/components/voteComponent/VoterInfo';
+
 
 Vue.use(Router);
 
@@ -137,6 +140,15 @@ export default new Router({
       name: 'UserListcomp',
       component: UserListcomp,
     },
-
+    {
+      path: '/nowvote/:code',
+      name: 'NowVote',
+      component: NowVote,
+    },
+    {
+      path: '/voterinfo/:code',
+      name: 'VoterInfo',
+      component: VoterInfo,
+    },
   ],
 });

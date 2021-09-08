@@ -213,4 +213,14 @@ users.get("/userlistcomp", (req, res) => {
 		});
 });
 
+users.get("/votelist", (req, res) => {
+	Vote.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
 module.exports = users;
