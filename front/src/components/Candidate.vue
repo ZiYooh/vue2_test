@@ -21,11 +21,8 @@
             <td>{{item.count}}</td>
           </tr>
         </tbody>
-        <v-btn color="info" to="/blockinfo">
-          해당 투표 블록체인 정보 확인
-        </v-btn>
-        <v-btn to="/conntest">
-          테스트페이지로
+        <v-btn class="mx-2" color="info" to="/blockinfo">
+          투표 현황 확인
         </v-btn>
         <v-dialog v-model="dialog" scrollable max-width="300px">
           <template v-slot:activator="{ on, attrs }">
