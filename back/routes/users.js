@@ -91,6 +91,7 @@ users.post("/makevote", (req, res) => {
 	const userData = {
 		
 		voteName: req.body.voteName,
+		voteCode: req.body.voteCode,
 		startDate: req.body.startDate,
 		endDate: req.body.endDate,
 		candidate1: req.body.candidate1,
@@ -103,7 +104,7 @@ users.post("/makevote", (req, res) => {
 	};
 
 	User.findOne({
-		voteName: req.body.voteName,
+		voteCode: req.body.voteCode,
 	})
 		.then((user) => {
 			if (!user) {

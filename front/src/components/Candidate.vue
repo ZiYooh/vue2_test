@@ -55,6 +55,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-btn> 테스트 </v-btn>
       </template>
     </v-simple-table>
     <v-container class="grey lighten-5">

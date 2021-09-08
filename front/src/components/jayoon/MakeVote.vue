@@ -16,6 +16,15 @@
               label="투표 제목"></v-text-field>
           </v-item-group>
           <v-item-group>
+            <label for="voteCode">투표 고유 코드</label>
+            <v-text-field
+              type="text"
+              v-model="voteCode"
+              class="form-control"
+              name="voteCode"
+              label="임의 길이의 영문/숫자 조합을 입력 해 주세요"></v-text-field>
+          </v-item-group>
+          <v-item-group>
             <label for="startDate">투표 시작일</label>
             <v-text-field
               type="date"
@@ -86,6 +95,7 @@ export default {
   data() {
     return {
       voteName: "",
+      voteCode: "",
       startDate: "",
       endDate: "",
       cadidate1: "",
@@ -100,6 +110,7 @@ export default {
       axios
         .post("http://localhost:5000/users/makevote", {
           voteName: this.voteName,
+          voteCode: this.voteCode,
           startDate: this.startDate,
           endDate: this.endDate,
           candidate1: this.candidate1,

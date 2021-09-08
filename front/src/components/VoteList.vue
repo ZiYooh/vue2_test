@@ -18,6 +18,7 @@
               :src="card.src"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              max-height="200"
             >
               <v-card-title v-text="card.title"></v-card-title>
             </v-img>
@@ -25,7 +26,6 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-
               <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
@@ -47,14 +47,25 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  data: () => ({
-    cards: [
-      { title: '롯데리아 레전드 버거 투표!! (2021/09/01 ~ 2021/12/31)', src: 'http://www.iconsumer.or.kr/news/photo/201909/9801_12230_5033.png', flex: 12 },
-      { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 12 },
-      { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 12 },
-    ],
-  }),
+  data() {
+    return {
+			users: [],
+      cards: [
+        { title: '롯데리아 레전드 버거 투표!! (2021/09/01 ~ 2021/12/31)', src: 'http://www.iconsumer.or.kr/news/photo/201909/9801_12230_5033.png', flex: 12 },
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 12 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 12 },
+      ],
+		};
+  },
+
+  created() {
+		axios.get("http://localhost:5000/users/userlist").then((response) => {
+			this.users = response.data;
+		});
+	},
 };
 </script>
 

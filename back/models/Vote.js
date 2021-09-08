@@ -5,6 +5,9 @@ const UserSchema = new Schema({
 	voteName: {
 		type: String,
 	},
+	voteCode: {
+		type: String,
+	},
 	startDate: {
 		type: Date,
 	},
