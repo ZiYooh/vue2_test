@@ -1,5 +1,5 @@
 <template>
-  <v-content justify="center" class="mx-15 mt-15">
+  <v-content justify="center" class="mx-15">
     <v-row justify="center" class="mt-5">
       <v-col cols="4" sm="4">
         <router-link to="/faq">

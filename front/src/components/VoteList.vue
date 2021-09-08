@@ -1,5 +1,5 @@
 <template>
-  <v-main class="mt-15">
+  <v-main class>
     <h1 class="text-center title">현재 진행중인 투표</h1>
   <v-card
     class="mx-auto"

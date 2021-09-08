@@ -1,5 +1,5 @@
 <template>
-    <v-content class="mx-15 mt-15">
+    <v-content class="mx-15">
     <v-row justify="center" class="mb-5">
       <h2 class="mb-3">자주 묻는 질문(FAQ)</h2>
       <v-expansion-panels inset>

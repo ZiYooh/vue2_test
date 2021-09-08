@@ -1,5 +1,5 @@
 <template>
-  <v-content class="mx-16 mt-14 px-16">
+  <v-content class="mx-16 px-16">
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -134,7 +134,7 @@ export default {
         alert('대상을 선택해 주세요');
         return;
       }
-      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 140000, from: this.account });
+      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 250000, from: this.account });
       this.$router.go();
     },
 

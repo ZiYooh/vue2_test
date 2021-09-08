@@ -1,5 +1,5 @@
 <template>
-    <v-content class="mx-15 mt-15">
+    <v-content class="mx-15">
     <h2 class="text-center mb-3">묻고 답하기(Q&A)</h2>
     <v-simple-table class="mx-15" dense>
       <template v-slot:default>
