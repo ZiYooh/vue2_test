@@ -8,6 +8,15 @@ contract Hello {
     mapping (address => string) public uservotes;
     mapping (string => uint8) public votes;
     mapping (address => uint8) public vote_or_not; // 0 = 투표 안했음 1 = 해당 투표 이미 했음
+    uint public voteTime;
+
+    struct VoterInfo{
+        address voter;
+        string option;
+        uint votetime;
+    }
+
+    VoterInfo[] VoteResult;
 
     constructor(string[] memory options) public { 
         owner = msg.sender; 
@@ -19,11 +28,22 @@ contract Hello {
         uservotes[msg.sender] = option;
         votes[option] += 1;
         vote_or_not[msg.sender] = 1;
+        voteTime = now;
+        VoterInfo memory info = VoterInfo(msg.sender, option, now);
+        pushInfo(info);
     }
 
     function totalVotesFor(string memory option) view public returns (uint8) {
         require(validOption(option));
         return votes[option];
+    }
+
+    function pushInfo(VoterInfo memory info) public {
+        VoteResult.push(info);
+    }
+
+    function getResult() view public returns (VoterInfo[] memory){
+        return VoteResult;
     }
 
     function validOption(string memory option) view public returns (bool) {
