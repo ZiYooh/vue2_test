@@ -37,11 +37,11 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="/userlist">
+          <v-list-item v-if="this.$store.state.user == 1" to="/userlist">
             <v-list-item-title>회원 리스트</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item to="/userlistcomp">
+          <v-list-item v-if="this.$store.state.user == 2" to="/userlistcomp">
             <v-list-item-title>기업 리스트</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -53,14 +53,14 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="/profile">
+          <v-list-item v-if="this.$store.state.user == 1" to="/profile">
             <v-list-item-title>회원 정보</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item to="/profilecomp">
+          <v-list-item v-if="this.$store.state.user == 2" to="/profilecomp">
             <v-list-item-title>기업 정보</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/makevote">
+          <v-list-item v-if="this.$store.state.user == 2" to="/makevote">
             <v-list-item-title>투표 개설 신청(기업용)</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -72,23 +72,23 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="/login">
+          <v-list-item v-if="this.$store.state.user == null" to="/login">
             <v-list-item-title>로그인</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/candidate">
+          <v-list-item v-if="this.$store.state.user == 1" v-on:click="logout">
             <v-list-item-title>로그아웃</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/register">
+          <v-list-item v-if="this.$store.state.user == null" to="/register">
             <v-list-item-title>일반 회원가입</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item to="/logincomp">
+          <v-list-item v-if="this.$store.state.user == null" to="/logincomp">
             <v-list-item-title>기업용 로그인</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/candidate">
+          <v-list-item v-if="this.$store.state.user == 2" v-on:click="logout">
             <v-list-item-title>기업용 로그아웃</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/registercomp">
+          <v-list-item v-if="this.$store.state.user == null" to="/registercomp">
             <v-list-item-title>기업 회원가입</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -139,8 +139,14 @@ export default {
   },
   methods: {
 
+		logout() {
+			localStorage.removeItem("usertoken");
+			this.$store.dispatch("update_user", null);
+		},
+
   },
 };
+
 </script>
 
 <style>

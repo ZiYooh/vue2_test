@@ -36,7 +36,7 @@
 <script>
 import axios from "axios";
 import router from "../../router";
-import EventBus from "../EventBus";
+//import EventBus from "../EventBus";
 
 export default {
 	data() {
@@ -54,15 +54,18 @@ export default {
 				})
 				
 				.then((res) => {
+					let token = res.data;
 					if (res.data.success == false) {
-						//console.log("login failed");
+						console.log(token);
 						alert(res.data.message);
 					}
 					else{
 						localStorage.setItem("usertoken", res.data);//성공했다면 data에 토큰이 있고, 실패했다면 err메시지담겨서옴
 						this.email = "";
 						this.password = "";
-						this.emitMethod();//이거를 성공했을 때만 emit하도록해야함
+						this.$store.dispatch("update_user", 2);
+						//this.$store.state.user = 2;
+						//this.emitMethod();//이거를 성공했을 때만 emit하도록해야함
 					}
 					router.push({ name: "HelloWorld" });
 				})
@@ -71,9 +74,9 @@ export default {
 				});
 			//this.emitMethod();
 		},
-		emitMethod() {
+		/*emitMethod() {
 			EventBus.$emit("logged-in-by-comp", "loggedincomp");
-		},
+		},*/
 	},
 };
 </script>

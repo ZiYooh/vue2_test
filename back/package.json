@@ -2,9 +2,9 @@
   "name": "back",
   "version": "0.0.0",
   "private": true,
-	"scripts": {
-		"serve": "nodemon server.js"
-	},
+  "scripts": {
+    "serve": "nodemon server.js"
+  },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "~1.4.4",

@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import vuetify from '@/plugins/vuetify';
 import App from './App';
 import router from './router';
+import store from "./vuex/store";
 import Config from './config';
 
 //require("../node_modules/bootstrap/dist/css/bootstrap.css");
@@ -34,6 +35,7 @@ new Vue({
   el: '#app',
   vuetify,
   router,
+  store,
   components: { App },
   template: '<App/>',
 });
