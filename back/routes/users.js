@@ -8,10 +8,64 @@ const User = require("../models/User");
 const Usercomp = require("../models/Usercomp");
 const Vote = require("../models/Vote");
 const VoteResult = require("../models/VoteResult");
+const Write = require("../models/Write");
 const { ReplSet } = require("mongodb");
 users.use(cors());
 
 process.env.SECRET_KEY = "secret";
+
+users.post("/write", (req, res) => {
+	const today = new Date();
+	const userData = {
+		
+		subject: req.body.subject,
+		content: req.body.content,
+		/*voteImage: req.body.voteImage,*/
+
+		created: today,
+	};
+
+	Write.findOne({
+		subject: req.body.subject,
+	})
+		.then((notice) => {
+			if (!notice) {
+				Write.create(userData)
+						.then((noticer) => {
+							res.json({ status: "write success" });
+						})
+						.catch((err) => {
+							res.send("error: " + err);
+						});
+				
+			} else {
+				res.json({ error: " already exists" });
+			}
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+users.get("/getlist", (req, res) => {
+	Write.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+users.get("/getcont", (res) => {
+	Write.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
 
 users.post("/register", (req, res) => {
 	const today = new Date();
@@ -63,7 +117,7 @@ users.post("/registercomp", (req, res) => {
 		created: today,
 	};
 
-	User.findOne({
+	Usercomp.findOne({
 		email: req.body.email,
 	})
 		.then((user) => {
@@ -239,6 +293,16 @@ users.get("/userlistcomp", (req, res) => {
 
 users.get("/votelist", (req, res) => {
 	Vote.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+users.get("/voteresult", (req, res) => {
+	VoteResult.find()
 		.then((result) => {
 			res.send(result);
 		})

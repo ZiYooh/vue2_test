@@ -67,6 +67,21 @@ export default new Router({
       component: Notice,
     },
     {
+      path: '/noticelist',
+      name: 'NoticeList',
+      component: NoticeList,
+    },
+    {
+      path: '/write',
+      name: 'Write',
+      component: Write,
+    },
+    {
+      path: '/contpage',
+      name: 'ContPage',
+      component: ContPage,
+    },
+    {
       path: '/help',
       name: 'Help',
       component: Help,

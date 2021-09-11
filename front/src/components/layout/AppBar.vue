@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
     <v-app-bar-items class="hidden-sm-and-down">
-      <v-btn to="/notice" text>
+      <v-btn to="/noticelist" text>
         공지사항
       </v-btn>
       <v-divider vertical></v-divider>
