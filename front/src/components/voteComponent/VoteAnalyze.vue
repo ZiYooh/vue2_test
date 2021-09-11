@@ -1,5 +1,5 @@
 <template>
-  <v-content class="mx-16 px-16">
+  <v-main>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -8,7 +8,10 @@
               후보자
             </th>
             <th class="text-left">
-              득표수
+              성별 분석
+            </th>
+            <th class="text-left">
+              지역별 분석
             </th>
           </tr>
         </thead>
@@ -18,57 +21,11 @@
             v-bind:key="item"
           >
             <td>{{item.title}}</td>
-            <td>{{item.count}}</td>
           </tr>
         </tbody>
-        <v-btn class="mx-2" color="info" v-on:click="gotoInfo()">
-          투표 내역 확인
-        </v-btn>
-        <v-btn class="mx-2" color="info" v-on:click="gotoAnalyze()">
-          투표 현황 분석
-        </v-btn>
-        <v-dialog v-model="dialog" scrollable max-width="300px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark v-bind="attrs" v-on="on">
-              투표 창 열기
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>후보자 선택</v-card-title>
-            <v-divider></v-divider>
-            <v-card-text style="height: 300px;">
-              <v-radio-group v-model="picked" column>
-                <v-radio
-                  v-for="item in results"
-                  v-bind:key="item"
-                  :label="`${item.title}`"
-                  :value="`${item.title}`"
-                >
-                </v-radio>
-              </v-radio-group>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                닫기
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false" v-on:click="voteForOption()">
-                투표
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-btn> 테스트 </v-btn>
       </template>
     </v-simple-table>
-    <v-container class="grey lighten-5">
-    <v-row>
-      <bar-chart :chart-data="dataCollection"></bar-chart>
-      <v-spacer></v-spacer>
-      <pie-chart :chart-data="dataCollection2"></pie-chart>
-    </v-row>
-    </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
@@ -103,13 +60,17 @@ export default {
       picked: null,
       dataCollection: null,
       dataCollection2: null,
+
+      sexGraphs: [],
+      locationGraphs: [],
+      ageGraphs: [],
+      
       code: null,
       aaaa: null,
       bbbb: null,
       sentence: null,
 
 			sex: decoded.sex,
-      age: decoded.age,
 			location: decoded.location,
     };
   },
@@ -190,26 +151,8 @@ export default {
     gotoAnalyze() {
       this.$router.push({name: "VoteAnalyze", params: {code: this.code} });
     },
-
-    voteInfotransfer(votedCandidate) {
-      axios
-      .post("http://localhost:5000/users/voteresult", {
-        code: this.code,
-        sex: this.sex,
-        age: this.age,
-        location: this.location,
-        candidate: votedCandidate
-      })
-      .then(() => {
-        this.$router.go();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
   },
-
-};
+}
 </script>
 
 <style>

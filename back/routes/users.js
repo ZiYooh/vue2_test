@@ -21,6 +21,7 @@ users.post("/register", (req, res) => {
 		email: req.body.email,
 		password: req.body.password,
 		sex: req.body.sex,
+		age: req.body.age,
 		location: req.body.location,
 		
 		created: today,
@@ -202,6 +203,7 @@ users.post("/voteresult", (req, res) => {
 		code: req.body.code,
 		candidate: req.body.candidate,
 		sex: req.body.sex,
+		age: req.body.age,
 		location: req.body.location,
 
 		created: today,

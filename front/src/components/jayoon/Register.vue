@@ -62,6 +62,14 @@
               </template>
             </v-radio>
           </v-radio-group>
+          <label for="age">나이대</label>
+          <v-select
+            v-model="age"
+            :items="age_list"
+            placeholder="나이대를 선택하세요"
+            prepend-icon="mdi-account-clock"
+            outlined
+          ></v-select>
           <label for="location">지역</label>
           <v-select
             v-model="location"
@@ -91,9 +99,11 @@ export default {
       email: "",
       password: "",
       sex: "",
+      age: "",
       location: "",
       locations_list: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종',
                   '제주', '경기', '강원', '충북', '충남', '경북', '경남', '전북', '전남'],
+      age_list: ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
     };
   },
   methods: {
@@ -105,6 +115,7 @@ export default {
           email: this.email,
           password: this.password,
           sex: this.sex,
+          age: this.age,
           location: this.location,
         })
         .then(() => {
