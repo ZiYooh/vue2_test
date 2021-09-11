@@ -22,7 +22,7 @@
               v-model="voteCode"
               class="form-control"
               name="voteCode"
-              label="임의 길이의 영문/숫자 조합을 입력 해 주세요"></v-text-field>
+              label="임의 길이의 영문을 입력 해 주세요"></v-text-field>
           </v-item-group>
           <v-item-group>
             <label for="startDate">투표 시작일</label>
