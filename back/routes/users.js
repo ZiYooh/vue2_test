@@ -139,6 +139,7 @@ users.post("/login", (req, res) => {
 						firstName: user.firstName,
 						lastName: user.lastName,
 						sex: user.sex,
+						age: user.age,
 						location: user.location,
 						email: user.email,
 					};

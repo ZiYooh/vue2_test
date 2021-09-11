@@ -27,6 +27,10 @@
                   <td>{{ sex }}</td>
                 </tr>
                 <tr>
+                  <td>나이대</td>
+                  <td>{{ age }}</td>
+                </tr>
+                <tr>
                   <td>지역</td>
                   <td>{{ location }}</td>
                 </tr>
@@ -49,6 +53,7 @@ export default {
 			firstName: decoded.firstName,
 			lastName: decoded.lastName,
 			sex: decoded.sex,
+      age: decoded.age,
 			location: decoded.location,
 			email: decoded.email,
 		};

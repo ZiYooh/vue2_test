@@ -47,7 +47,7 @@
             v-model="sex">
             <v-radio
               id="male"
-              :value="남"
+              value="남"
             >
               <template v-slot:label>
                 <div><strong>남</strong></div>
@@ -55,7 +55,7 @@
             </v-radio>
             <v-radio
               id="female"
-              :value="여"
+              value="여"
             >
               <template v-slot:label>
                 <div><strong>여</strong></div>

@@ -142,6 +142,7 @@ export default {
 		logout() {
 			localStorage.removeItem("usertoken");
 			this.$store.dispatch("update_user", null);
+      this.$router.push("/");
 		},
 
   },
