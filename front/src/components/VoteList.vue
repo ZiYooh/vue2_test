@@ -13,7 +13,7 @@
           :cols="card.flex"
         >
           <v-card>
-            <router-link :to="{ name: 'NowVote', params: card.voteCode}">
+            <router-link :to="{ name: 'NowVote', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
 
