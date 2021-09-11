@@ -1,6 +1,10 @@
 <template>
   <v-app class>
     <h1>투표정보 테스트 페이지</h1>
+    <v-btn
+      v-on:click="goBack()"
+      color="success"
+      class="mx-auto"> 이전 페이지로 </v-btn>
     <v-simple-table class="mx-auto">
       <template v-slot:default>
         <thead>
@@ -93,7 +97,10 @@ export default {
   methods: {
     openEtherScan(address) {
       window.open('https://etherscan.io/address/'+ address);
-    }
+    },
+    goBack() {
+      this.$router.push({ name: 'NowVote', params: {code: this.code} });
+    },
   },
 };
 </script>
