@@ -69,8 +69,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import BarChart from '../charts/BarChart.vue';
 import PieChart from '../charts/PieChart.vue';
+import jwtDecode from "jwt-decode";
 
 let i;
 
@@ -81,6 +83,9 @@ export default {
   },
 
   data() {
+    const token = localStorage.usertoken;
+		const decoded = jwtDecode(token);
+
     return {
       account: '',
       contractInstance: null,
@@ -99,6 +104,9 @@ export default {
       aaaa: null,
       bbbb: null,
       sentence: null,
+
+			sex: decoded.sex,
+			location: decoded.location,
     };
   },
   created() {
@@ -142,7 +150,7 @@ export default {
         return;
       }
       await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 250000, from: this.account });
-      this.$router.go();
+      this.voteInfotransfer(this.picked);
     },
 
     fillData() {
@@ -172,7 +180,23 @@ export default {
     },
 
     gotoInfo() {
-      this.$router.push({name: "VoterInfo", params: this.code});
+      this.$router.push({name: "VoterInfo", params: {code: this.code} });
+    },
+
+    voteInfotransfer(votedCandidate) {
+      axios
+      .post("http://localhost:5000/users/voteresult", {
+        code: this.code,
+        sex: this.sex,
+        location: this.location,
+        candidate: votedCandidate
+      })
+      .then(() => {
+        this.$router.go();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   },
 

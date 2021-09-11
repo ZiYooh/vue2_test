@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Usercomp = require("../models/Usercomp");
 const Vote = require("../models/Vote");
+const VoteResult = require("../models/VoteResult");
 const { ReplSet } = require("mongodb");
 users.use(cors());
 
@@ -188,6 +189,26 @@ users.post("/logincomp", (req, res) => {
 				res.json({ success: false,
 					message: "User does not exist"});
 			}
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+users.post("/voteresult", (req, res) => {
+	const today = new Date();
+	const userData = {
+		
+		code: req.body.code,
+		candidate: req.body.candidate,
+		sex: req.body.sex,
+		location: req.body.location,
+
+		created: today,
+	};
+	VoteResult.create(userData)
+		.then((user) => {
+			res.json({ status: "voteresult done" });
 		})
 		.catch((err) => {
 			res.send("error: " + err);
