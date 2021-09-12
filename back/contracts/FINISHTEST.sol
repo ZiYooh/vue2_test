@@ -1,7 +1,7 @@
 pragma solidity >=0.4.21 <0.7.0;
 pragma experimental ABIEncoderV2;
 
-contract SANGSU { 
+contract FINISHTEST { 
 	address public owner; // public 으로 선언하여 자동 getter 생성 
     
     string[] public optionList;
