@@ -97,27 +97,52 @@
     </v-app-bar>
       <v-navigation-drawer v-model="drawer" absolute bottom temporary>
         <v-list>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title class="text-h6">
+                블록체인 투표 시스템
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                개발 중
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         <v-list-item-group
           v-model="group"
-          active-class="deep-purple--text text--accent-4"
         >
+          <v-divider></v-divider>
           <v-list-item to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-home-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>홈</v-list-item-title>
           </v-list-item>
 
           <v-list-item to="/notice">
+            <v-list-item-icon>
+              <v-icon>mdi-bullhorn-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>공지사항</v-list-item-title>
           </v-list-item>
 
           <v-list-item to="/votelist">
+            <v-list-item-icon>
+              <v-icon>mdi-vote-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>진행중인 투표</v-list-item-title>
           </v-list-item>
 
           <v-list-item to="/endvote">
+            <v-list-item-icon>
+              <v-icon>mdi-calendar-check-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>종료된 투표</v-list-item-title>
           </v-list-item>
 
           <v-list-item to="/help">
+            <v-list-item-icon>
+              <v-icon>mdi-alert-circle-check-outline</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>고객 센터</v-list-item-title>
           </v-list-item>
 
