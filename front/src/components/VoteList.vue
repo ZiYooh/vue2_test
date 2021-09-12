@@ -3,7 +3,7 @@
     <h1 class="text-center title">현재 진행중인 투표</h1>
   <v-card
     class="mx-auto"
-    max-width="1250"
+    max-width="1000"
   >
     <v-container fluid>
       <v-row dense>
@@ -12,8 +12,8 @@
           v-bind:key="card.voteName"
           :cols="card.flex"
         >
-          <v-card>
-            <router-link :to="{ name: 'NowVote', params: {code: card.voteCode} }">
+          <v-card min-width="1000">
+            <router-link id="myid2" :to="{ name: 'NowVote', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
 
@@ -80,5 +80,12 @@ export default {
 
 .title {
   font-family: InfinitySans-RegularA1;
+}
+
+#myid2 {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
 }
 </style>

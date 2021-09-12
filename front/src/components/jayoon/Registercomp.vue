@@ -74,7 +74,7 @@ export default {
           password: this.password,
         })
         .then(() => {
-          router.push({ name: "Logincomop" });
+          router.push({ name: "Logincomp" });
         })
         .catch((err) => {
           console.log(err);

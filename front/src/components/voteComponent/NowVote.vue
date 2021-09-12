@@ -153,7 +153,7 @@ export default {
         alert('대상을 선택해 주세요');
         return;
       }
-      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 250000, from: this.account });
+      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 500000, from: this.account });
       this.voteInfotransfer(this.picked);
     },
 
