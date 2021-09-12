@@ -52,7 +52,7 @@
       </template>
     </v-simple-table>
     <v-col class="text-right">
-      <v-btn to="/notice" depressed small color="#779999"> 더보기 </v-btn>
+      <v-btn to="/notice" depressed small color="#D3D3D3"> 더보기 </v-btn>
     </v-col>
     </v-card>
 
@@ -95,7 +95,7 @@
       </template>
     </v-simple-table>
     <v-col class="text-right">
-      <v-btn to="/votelist" depressed small color="#779999"> 더보기 </v-btn>
+      <v-btn to="/votelist" depressed small color="#D3D3D3"> 더보기 </v-btn>
     </v-col>
     </v-card>
   </v-main>

@@ -1,8 +1,8 @@
 <template>
     <v-content class="mx-15">
-    <v-row justify="center" class="mb-5">
+    <v-row justify="center" class="mt-5">
       <h2 class="mb-3">자주 묻는 질문(FAQ)</h2>
-      <v-expansion-panels inset>
+      <v-expansion-panels inset class="mx-10">
         <v-expansion-panel>
           <v-expansion-panel-header>메타마스크 연동 방법</v-expansion-panel-header>
           <v-expansion-panel-content>

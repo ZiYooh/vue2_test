@@ -1,10 +1,10 @@
 <template>
-  <v-app class>
-    <h1>투표정보 분석 페이지</h1>
+  <v-app>
+    <h1 class = "mb-3">투표정보 분석 페이지</h1>
     <v-btn
       v-on:click="goBack()"
       color="success"
-      class="mx-auto"> 이전 페이지로 </v-btn>
+      class="mx-auto mb-3"> 이전 페이지로 </v-btn>
     <v-simple-table class="mx-auto">
       <template v-slot:default>
         <thead>

@@ -1,10 +1,12 @@
 <template>
   <v-app class>
-    <h1>투표정보 테스트 페이지</h1>
+    <h1 class="mb-3">지갑 주소별 투표내역 확인 페이지</h1>
+    <h4 class="mb-3">주소 클릭 시 해당 지갑의 이더스캔 페이지로 이동합니다.</h4>
     <v-btn
       v-on:click="goBack()"
       color="success"
-      class="mx-auto"> 이전 페이지로 </v-btn>
+      class="mx-auto mb-3"> 이전 페이지로 </v-btn>
+      <v-card>
     <v-simple-table class="mx-auto">
       <template v-slot:default>
         <thead>
@@ -13,7 +15,7 @@
               #
             </th>
             <th class="text-center">
-              계좌 주소
+              지갑 주소
             </th>
             <th class="text-center">
               대상
@@ -29,13 +31,14 @@
             v-bind:key="item.index"
           >
             <td>{{ item.index }}</td>
-            <td v-on:click="openEtherScan(item.voter)">{{ item.voter }}</td>
+            <td id="myid" v-on:click="openEtherScan(item.voter)">{{ item.voter }}</td>
             <td>{{ item.option }}</td>
             <td>{{ item.votetime }}</td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+      </v-card>
   </v-app>
 </template>
 
@@ -105,5 +108,8 @@ export default {
 };
 </script>
 <style>
-
+#myid {
+  color: blue;
+  text-decoration: underline;
+}
 </style>
