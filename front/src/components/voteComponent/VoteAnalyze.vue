@@ -29,7 +29,7 @@
             v-bind:key="item"
           >
             <td>{{item.title}}</td>
-            <td><bar-chart :chart-data="item.sex"></bar-chart></td>
+            <td><pie-chart :chart-data="item.sex"></pie-chart></td>
             <td><bar-chart :chart-data="item.location"></bar-chart></td>
             <td><bar-chart :chart-data="item.age"></bar-chart></td>
           </tr>
@@ -234,7 +234,8 @@ export default {
           datasets: [
           {
             label: '투표수',
-            backgroundColor: ["#1E88E5", "#D81B60"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899", "#4682B4", "#800000", "#000000",
+                              "#87CEFA", "#F08080", "#98FB98", "#D2691E", "#483D8B", "#2F4F4F", "#6495ED", "#A0522D"],
             data: this.locationDatas.filter((item) => {
               return item.option == this.optionsAscii[i];})
               .map(item => item.count),
@@ -247,7 +248,7 @@ export default {
           datasets: [
           {
             label: '투표수',
-            backgroundColor: ["#1E88E5", "#D81B60"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899"],
             data: this.ageDatas.filter((item) => {
               return item.option == this.optionsAscii[i];})
               .map(item => item.count),
