@@ -39,12 +39,12 @@
               </v-btn>
             </v-card>
             <v-card style="width: 10%; float: right;">
-              <v-btn large block color="info" @click='sakjei' style='width:100px;float: right;'>
+              <v-btn v-if="this.$store.state.user == 2" large block color="info" @click='sakjei' style='width:100px;float: right;'>
                 게시글 삭제
               </v-btn>
             </v-card>
             <v-card style="width: 10%; float: middle;">
-              <v-btn large block color="info" @click='soojung(result[0])' style='width:100px;float: middle;'>
+              <v-btn v-if="this.$store.state.user == 2" large block color="info" @click='soojung(result[0])' style='width:100px;float: middle;'>
                 게시글 수정
               </v-btn>
             </v-card>
