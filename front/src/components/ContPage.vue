@@ -34,10 +34,21 @@
           </v-item-group>          
           <v-container>
             <v-card style="width: 10%; float: left;">
-        <v-btn large block color="info" @click='toNotice' style='width:100px;'>
-            목록
-      </v-btn>
-    </v-card>
+              <v-btn large block color="info" @click='toNotice' style='width:100px;float: left'>
+                목록
+              </v-btn>
+            </v-card>
+            <v-card style="width: 10%; float: right;">
+              <v-btn large block color="info" @click='sakjei' style='width:100px;float: right;'>
+                게시글 삭제
+              </v-btn>
+            </v-card>
+            <v-card style="width: 10%; float: middle;">
+              <v-btn large block color="info" @click='soojung(result[0])' style='width:100px;float: middle;'>
+                게시글 수정
+              </v-btn>
+            </v-card>
+    
     </v-container>
       </v-col>
     </v-row>
@@ -60,10 +71,10 @@ export default {
 		axios.get("http://localhost:5000/users/getlist").then((response) => {
 			this.writes = response.data;
       var id = this.$route.query;
-      this.result = this.writes.filter(function(param){    
+      this.result = this.writes.filter(function(param){
       return param._id === id;
      });
-      console.log(this.result[0]);
+      //console.log(this.result[0]);
 		});
 	},
   mounted(){
@@ -72,9 +83,27 @@ export default {
 
   methods: {
     toNotice() {
-      //router.push({ name: "Notice" , query: {name: 'cat', age: 3}});
       this.$router.push({ name: "Notice"});
 		},
+    sakjei() {
+      axios
+        .post("http://localhost:5000/users/del", {
+          _id: this.$route.query,
+        })
+        .then(() => {
+          alert('삭제되었습니다.');
+          this.$router.push({ name: "Notice" });
+         })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    soojung(param) {
+      this.$router.push({ name: "Update" , query: param});
+    },
+    // sakjei() {
+    //   this.$router.push({ name: "Notice"});
+		// },
   },
 
 };

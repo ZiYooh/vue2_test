@@ -24,15 +24,15 @@
                 </tr>
                 <tr>
                   <td>성별</td>
-                  <td>{{ sex }}</td>
+                  <td>{{ result[0].sex }}</td>
                 </tr>
                 <tr>
                   <td>나이대</td>
-                  <td>{{ age }}</td>
+                  <td>{{ result[0].age }}</td>
                 </tr>
                 <tr>
                   <td>지역</td>
-                  <td>{{ location }}</td>
+                  <td>{{ result[0].location }}</td>
                 </tr>
               </tbody>
             </template>
@@ -40,24 +40,50 @@
         </v-card>
       </v-col>
     </v-row>
+              <v-btn class="text-center" large color="info" @click='modify()'>
+                게시글 수정
+              </v-btn>
   </v-main>
 </template>
 
 <script>
+import axios from "axios";
 import jwtDecode from "jwt-decode";
+
 export default {
 	data() {
 		const token = localStorage.usertoken;
 		const decoded = jwtDecode(token);
 		return {
+      profile: [],
+      result : '',
 			firstName: decoded.firstName,
 			lastName: decoded.lastName,
+			email: decoded.email,
 			sex: decoded.sex,
       age: decoded.age,
 			location: decoded.location,
-			email: decoded.email,
 		};
 	},
+  created() {
+		axios.get("http://localhost:5000/users/getprofile").then((response) => {
+			this.profile = response.data;
+       var email = this.email;
+       this.result = this.profile.filter(function(param){
+       return param.email === email;
+      });
+      console.log(this.result[0]);
+		});
+	},
+
+  methods: {
+    modify() {
+      this.$router.push({ name: "ModProfile" , query: {firstName: this.firstName, lastName: this.lastName, email: this.email, sex: this.result[0].sex, age: this.result[0].age, location: this.result[0].location}});
+    },
+    // sakjei() {
+    //   this.$router.push({ name: "Notice"});
+		// },
+  },
 };
 </script>
 

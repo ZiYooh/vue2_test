@@ -8,6 +8,7 @@ import Candidate from '@/components/Candidate';
 import Notice from '@/components/Notice';
 import NoticeList from '@/components/NoticeList';
 import Write from '@/components/Write';
+import Update from '@/components/Update';
 import ContPage from '@/components/ContPage';
 import Help from '@/components/Help';
 import FAQ from '@/components/FAQ';
@@ -22,6 +23,7 @@ import MakeVote from '@/components/jayoon/MakeVote';
 import Register from '@/components/jayoon/Register';
 import Registercomp from '@/components/jayoon/Registercomp';
 import Profile from '@/components/jayoon/Profile';
+import ModProfile from '@/components/jayoon/ModProfile';
 import UserList from '@/components/jayoon/UserList';
 import Profilecomp from '@/components/jayoon/Profilecomp';
 import UserListcomp from '@/components/jayoon/UserListcomp';
@@ -78,6 +80,11 @@ export default new Router({
       path: '/write',
       name: 'Write',
       component: Write,
+    },
+    {
+      path: '/update',
+      name: 'Update',
+      component: Update,
     },
     {
       path: '/contpage',
@@ -143,6 +150,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
+    },
+    {
+      path: '/modprofile',
+      name: 'ModProfile',
+      component: ModProfile,
     },
     {
       path: '/userlist',
