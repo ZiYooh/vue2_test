@@ -13,7 +13,7 @@
           :cols="card.flex"
         >
           <v-card min-width="1000">
-            <router-link :to="{ name: 'NowVote', params: {code: card.voteCode} }">
+            <router-link id="myid2" :to="{ name: 'NowVote', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
 
@@ -80,5 +80,12 @@ export default {
 
 .title {
   font-family: InfinitySans-RegularA1;
+}
+
+#myid2 {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
 }
 </style>
