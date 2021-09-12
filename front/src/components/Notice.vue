@@ -2,7 +2,6 @@
   <div>
   <v-content class="mx-15">
     <h1>공지사항 페이지 입니다</h1>
-    <h1>{{writes[0]}}</h1>
     
     <v-simple-table class="mx-15" dense>
       <template v-slot:default>
@@ -28,7 +27,7 @@
             <!-- <td class="txt_left"><a href="javascript:;" @click="fnView(`${write.id}`)">{{write.subject}}</a></td> -->
 						<td v-on:click.stop="showCont(write)">{{ write.subject }}</td>
 						<td>관리자</td>
-						<td>{{ write._id }}</td>
+						<td>{{ write.date }}</td>
 					</tr>
           
           <tbody>

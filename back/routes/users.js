@@ -47,6 +47,74 @@ users.post("/write", (req, res) => {
 		});
 });
 
+users.post("/upd", (req, res) => {
+	const today = new Date();
+	const userData = {
+		
+		subject: req.body.subject,
+		content: req.body.content,
+		/*voteImage: req.body.voteImage,*/
+
+		created: today,
+	};
+	Write.updateOne({
+		subject: req.body.oldsubject,
+	}, {
+		subject: req.body.subject,
+		content: req.body.content
+	})
+	.then((notice) => {
+		if (!notice) {
+			Write.create(userData)
+					.then((noticer) => {
+						res.json({ status: "write success" });
+					})
+					.catch((err) => {
+						res.send("error: " + err);
+					});
+			
+		} else {
+			res.json({ error: " already exists" });
+		}
+	})
+	.catch((err) => {
+		res.send("error: " + err);
+	});
+});
+
+users.post("/modp", (req, res) => {
+	const userData = {
+		/*voteImage: req.body.voteImage,*/
+	};
+	User.updateOne({
+		email: req.body.email,
+	}, {
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		sex: req.body.sex,
+		age: req.body.age,
+		location: req.body.location,
+	})
+	.then((notice) => {
+		if (!notice) {
+			Write.create(userData)
+					.then((noticer) => {
+						res.json({ status: "write success" });
+					})
+					.catch((err) => {
+						res.send("error: " + err);
+					});
+			
+		} else {
+			res.json({ error: " already exists" });
+		}
+	})
+	.catch((err) => {
+		res.send("error: " + err);
+	});
+});
+
 users.get("/getlist", (req, res) => {
 	Write.find()
 		.then((result) => {
@@ -57,8 +125,8 @@ users.get("/getlist", (req, res) => {
 		});
 });
 
-users.get("/getcont", (res) => {
-	Write.find()
+users.get("/getprofile", (req, res) => {
+	User.find()
 		.then((result) => {
 			res.send(result);
 		})
@@ -66,6 +134,35 @@ users.get("/getcont", (res) => {
 			res.send("error: " + err);
 		});
 });
+
+users.post("/del", (req, res) => {
+	const userData = {
+		_id: req.body._id,
+	};
+
+	Write.deleteOne({
+		_id: req.body._id,
+	})
+		.then((notice) => {
+				if (!notice) {
+					Write.create(userData)
+							.then((noticer) => {
+								res.json({ status: "delete success" });
+							})
+							.catch((err) => {
+								res.send("error: " + err);
+							});
+					
+				} else {
+					res.json({ error: " already exists" });
+				}
+			})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+
+});
+
 
 users.post("/register", (req, res) => {
 	const today = new Date();
