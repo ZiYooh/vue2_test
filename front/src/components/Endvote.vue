@@ -11,7 +11,7 @@
     <v-divider class="mb-5 mx-4"></v-divider>
       <v-row dense>
         <v-col
-          v-for="card in reverse"
+          v-for="card in votes"
           v-bind:key="card.voteName"
           :cols="card.flex"
         >
@@ -58,12 +58,6 @@ export default {
       console.log(this.votes[0].voteCode);
 		});
 	},
-
-    computed: {
-    reverse: function() {
-        return this.votes.reverse();
-    }
-  },
 };
 </script>
 
