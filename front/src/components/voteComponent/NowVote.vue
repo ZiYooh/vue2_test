@@ -91,7 +91,7 @@
     <v-divider class="mx-4 mt-3 mb-4"></v-divider>
     <v-container class="grey lighten-5">
     <v-row>
-      <bar-chart :chart-data="dataCollection"></bar-chart>
+      <bar-chart :chart-data="dataCollection" :options="chartOptions"></bar-chart>
       <v-spacer></v-spacer>
       <pie-chart :chart-data="dataCollection2"></pie-chart>
     </v-row>
@@ -142,6 +142,17 @@ export default {
 			sex: decoded.sex,
       age: decoded.age,
 			location: decoded.location,
+
+      chartOptions: {
+        scales: {
+          yAxes: [{
+            display: true, // y축 기준 표시 여부
+            ticks: { // y축 기준 데이터 변경
+              beginAtZero: true,
+            },
+          }],
+        }, // scales 끝
+      },
     };
   },
   

@@ -42,8 +42,8 @@
           >
             <td class="text-center">{{item.title}}</td>
             <td class="text-center"><pie-chart :chart-data="item.sex"></pie-chart></td>
-            <td class="text-center"><bar-chart :chart-data="item.location"></bar-chart></td>
-            <td class="text-center"><bar-chart :chart-data="item.age"></bar-chart></td>
+            <td class="text-center"><bar-chart :chart-data="item.location" :options="chartOptions"></bar-chart></td>
+            <td class="text-center"><bar-chart :chart-data="item.age" :options="chartOptions"></bar-chart></td>
           </tr>
         </tbody>
       </template>
@@ -113,6 +113,17 @@ export default {
       ageDatas: [],
       
       resultsWithGraphs: [],
+
+      chartOptions: {
+        scales: {
+          yAxes: [{
+            display: true, // y축 기준 표시 여부
+            ticks: { // y축 기준 데이터 변경
+              beginAtZero: true,
+            },
+          }],
+        }, // scales 끝
+      },
     };
   },
 	created() {
