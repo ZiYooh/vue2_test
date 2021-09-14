@@ -36,37 +36,6 @@
         <v-btn class="mx-2 mt-4" color="info" v-on:click="gotoAnalyze()">
           투표 현황 분석
         </v-btn>
-        <v-dialog v-model="dialog" scrollable max-width="300px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn class="float-right" color="primary" dark v-bind="attrs" v-on="on">
-              투표 창 열기
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>후보자 선택</v-card-title>
-            <v-divider></v-divider>
-            <v-card-text style="height: 300px;">
-              <v-radio-group v-model="picked" column>
-                <v-radio
-                  v-for="item in results"
-                  v-bind:key="item"
-                  :label="`${item.title}`"
-                  :value="`${item.title}`"
-                >
-                </v-radio>
-              </v-radio-group>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                닫기
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false" v-on:click="voteForOption()">
-                투표
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
       </template>
     </v-simple-table>
     <v-divider class="mx-4"></v-divider>

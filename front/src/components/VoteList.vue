@@ -1,18 +1,22 @@
 <template>
   <v-main class>
-    <h1 class="text-center title">현재 진행중인 투표</h1>
   <v-card
-    class="mx-auto"
-    max-width="1000"
+      outlined
+      class="mx-auto mt-5"
+      max-width="1500"
   >
     <v-container fluid>
+      <v-col>
+        <h3 class="mt-3 ml-2 mb-2">진행중인 투표</h3>
+      </v-col>
+    <v-divider class="mb-5"></v-divider>
       <v-row dense>
         <v-col
           v-for="card in votes"
           v-bind:key="card.voteName"
           :cols="card.flex"
         >
-          <v-card min-width="1000">
+          <v-card class="mb-5" min-width="1000">
             <router-link id="myid2" :to="{ name: 'NowVote', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
@@ -32,6 +36,7 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+          <v-divider class="mb-1"></v-divider>
         </v-col>
       </v-row>
     </v-container>
@@ -86,6 +91,6 @@ export default {
   color: black;
   font-size: 20px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: normal;
 }
 </style>

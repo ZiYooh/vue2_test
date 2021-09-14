@@ -10,6 +10,7 @@ const Vote = require("../models/Vote");
 const VoteResult = require("../models/VoteResult");
 const Write = require("../models/Write");
 const QnAWrite = require("../models/QnAWrite");
+const EndVote = require("../models/EndVote");
 const { ReplSet } = require("mongodb");
 users.use(cors());
 
@@ -519,6 +520,17 @@ users.get("/userlistcomp", (req, res) => {
 // 투표목록 가져오는 처리
 users.get("/votelist", (req, res) => {
 	Vote.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+// 투표목록 가져오는 처리
+users.get("/endvotelist", (req, res) => {
+	EndVote.find()
 		.then((result) => {
 			res.send(result);
 		})

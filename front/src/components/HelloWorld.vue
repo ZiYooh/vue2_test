@@ -64,41 +64,6 @@
       class="mx-auto mt-5"
       max-width="1250"
     >
-    <!--
-    <h2 class="text-center mt-3 mb-3"> 최근 진행중인 투표 </h2>
-    <v-simple-table class="" dense>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">
-              번호
-            </th>
-            <th class="text-left">
-              투표 제목
-            </th>
-            <th class="text-left">
-              시작일
-            </th>
-            <th class="text-left">
-              종료일
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in votes" :key="item.id">
-						<td>{{ index + 1 }}</td>
-            <td>
-            <router-link :to="{ name: 'NowVote', params: {code: item.voteCode} }">
-              {{ item.voteName }}
-            </router-link>
-            </td>
-            <td>{{ item.startDate }}</td>
-						<td>{{ item.endDate }}</td>
-					</tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-    -->
     <h3 class="mt-3 ml-5 mb-4">최근 진행중인 투표</h3>
     <v-divider class="mx-4 mb-1"></v-divider>
     <v-simple-table dense class="mx-4">

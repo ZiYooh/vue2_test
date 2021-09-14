@@ -29,6 +29,7 @@ import UserListcomp from '@/components/jayoon/UserListcomp';
 import NowVote from '@/components/voteComponent/NowVote';
 import VoterInfo from '@/components/voteComponent/VoterInfo';
 import VoteAnalyze from '@/components/voteComponent/VoteAnalyze';
+import EndVoteView from '@/components/voteComponent/EndVoteView';
 import QNA from '@/components/QNA';
 import QNAWrite from '@/components/QNAWrite';
 import QNAContPage from '@/components/QNAContPage';
@@ -182,6 +183,11 @@ export default new Router({
       path: '/voteanalyze/:code',
       name: 'VoteAnalyze',
       component: VoteAnalyze,
+    },
+    {
+      path: '/endvoteview/:code',
+      name: 'EndVoteView',
+      component: EndVoteView,
     },
     {
       path: '/qna',

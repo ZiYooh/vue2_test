@@ -37,12 +37,14 @@
               </tbody>
             </template>
           </v-simple-table>
+          <v-col class="text-right">
+            <v-btn class="text-center" large color="success" @click='modify()'>
+                회원정보 수정
+            </v-btn>
+          </v-col>
         </v-card>
       </v-col>
     </v-row>
-              <v-btn class="text-center" large color="info" @click='modify()'>
-                게시글 수정
-              </v-btn>
   </v-main>
 </template>
 

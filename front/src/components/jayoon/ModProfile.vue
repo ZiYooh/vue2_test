@@ -4,7 +4,7 @@
       <v-col md="6" class="mt-5 mx-auto">
         <v-form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">
-						Register An Account
+						회원정보 수정
 					</h1>
           <v-item-group>
             <label for="firstName">성</label>
