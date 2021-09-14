@@ -6,7 +6,7 @@
       max-width="1500"
   >
       <v-col>
-        <h3 class="mt-3 ml-2 mb-2">진행중인 투표</h3>
+        <h3 class="mt-3 ml-2 mb-2">종료된 투표</h3>
       </v-col>
     <v-divider class="mb-5 mx-4"></v-divider>
       <v-row dense>
