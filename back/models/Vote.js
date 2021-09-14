@@ -14,15 +14,7 @@ const UserSchema = new Schema({
 	endDate: {
 		type: Date,
 	},
-	candidate1: {
-		type: String,
-		required: true,
-	},
-	candidate2: {
-		type: String,
-		required: true,
-	},
-	candidate3: {
+	candidates: {
 		type: String,
 		required: true,
 	},

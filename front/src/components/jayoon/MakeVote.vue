@@ -48,31 +48,15 @@
               label="투표 마감일"></v-text-field> 
           </v-item-group>
           <v-item-group>
-            <label for="candidate1">후보 등록</label>
+            <label for="candidates">후보 등록</label>
             <v-text-field
               outlined
               dense
               type="text"
-              v-model="candidate1"
+              v-model="candidates"
               class="form-control"
               name="voteName"
-              placeholder="후보1"></v-text-field>
-            <v-text-field
-              outlined
-              dense
-              type="text"
-              v-model="candidate2"
-              class="form-control"
-              name="voteName"
-              placeholder="후보2"></v-text-field>
-            <v-text-field
-              outlined
-              dense
-              type="text"
-              v-model="candidate3"
-              class="form-control"
-              name="voteName"
-              placeholder="후보3"></v-text-field>
+              placeholder="후보들을 콤마(,)로 구분 하여 입력 해 주세요"></v-text-field>
           </v-item-group>
           <v-item-group>
             <label for="description">투표 설명</label>
@@ -105,9 +89,7 @@ export default {
       voteCode: "",
       startDate: "",
       endDate: "",
-      cadidate1: "",
-      cadidate2: "",
-      cadidate3: "",
+      cadidates: "",
       description: "",
       //voteImage: "",
     };
@@ -120,13 +102,12 @@ export default {
           voteCode: this.voteCode,
           startDate: this.startDate,
           endDate: this.endDate,
-          candidate1: this.candidate1,
-          candidate2: this.candidate2,
-          candidate3: this.candidate3,
+          candidates: this.candidates,
           description: this.description,
           //voteImage: this.voteImage,
         })
         .then(() => {
+          alert("신청이 완료되었습니다!");
           router.push({ name: "HelloWorld" });
         })
         .catch((err) => {

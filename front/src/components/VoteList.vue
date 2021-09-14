@@ -11,7 +11,7 @@
     <v-divider class="mb-5 mx-4"></v-divider>
       <v-row dense>
         <v-col
-          v-for="card in votes"
+          v-for="card in reverse"
           v-bind:key="card.voteName"
           :cols="card.flex"
         >
@@ -19,7 +19,7 @@
             <router-link id="myid2" :to="{ name: 'NowVote', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
-
+            <span class="ml-4">투표 기간: {{card.startDate.substring(0,10)}} ~ {{card.endDate.substring(0,10)}}</span>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn icon>
@@ -52,24 +52,18 @@ export default {
 		};
   },
 
-  beforeCreate: function () {
-      console.log('beforeCreate');
-    },
-
   created() {
 		axios.get("http://localhost:5000/users/votelist").then((response) => {
 			this.votes = response.data;
-      console.log(this.votes[0].voteCode);
 		});
 	},
 
-  mounted: function () {
-      console.log('mounted');
-    },
+  computed: {
+    reverse: function() {
+        return this.votes.reverse();
+    }
+  },
 
-  updated: function () {
-      console.log('updated');
-  }
 };
 </script>
 

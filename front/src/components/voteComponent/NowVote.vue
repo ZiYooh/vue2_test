@@ -144,12 +144,16 @@ export default {
 			location: decoded.location,
     };
   },
+  
   created() {
+    if(this.$store.state.user < 1) {
+        alert("로그인 해 주세요!");
+        this.$router.push('/');
+    }
     this.code = this.$route.params.code;
     axios.get("http://localhost:5000/users/votelist").then((response) => {
 			this.rVotes = response.data;
       for (i = 0; i < this.rVotes.length; i++){
-        console.log('For문 들어왔다');
         if(this.rVotes[i].voteCode == this.code){
           this.nowVote = this.rVotes[i];
         }
@@ -187,6 +191,12 @@ export default {
         alert('대상을 선택해 주세요');
         return;
       }
+
+      if(this.$store.state.user == 2) {
+        alert("투표는 일반회원만 가능합니다");
+        return;
+      }
+
       await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 500000, from: this.account });
       this.voteInfotransfer(this.picked);
     },
@@ -238,7 +248,7 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-    }
+    },
   },
 
 };

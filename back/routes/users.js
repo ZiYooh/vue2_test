@@ -370,9 +370,7 @@ users.post("/makevote", (req, res) => {
 		voteCode: req.body.voteCode,
 		startDate: req.body.startDate,
 		endDate: req.body.endDate,
-		candidate1: req.body.candidate1,
-		candidate2: req.body.candidate2,
-		candidate3: req.body.candidate3,
+		candidates: req.body.candidates,
 		description: req.body.description,
 		/*voteImage: req.body.voteImage,*/
 
