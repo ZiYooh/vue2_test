@@ -16,7 +16,7 @@
           :cols="card.flex"
         >
           <v-card :elevation="7" class="mx-4 mt-5 mb-8" min-width="1400">
-            <router-link id="myid2" :to="{ name: 'NowVote', params: {code: card.voteCode} }">
+            <router-link id="myid2" :to="{ name: 'EndVoteView', params: {code: card.voteCode} }">
               <v-card-title v-text="card.voteName"></v-card-title>
             </router-link>
 

@@ -30,11 +30,14 @@
             <td>{{item.count}}</td>
           </tr>
         </tbody>
-        <v-btn class="mx-2 mt-4" color="info" v-on:click="gotoInfo()">
+        <v-btn class="mx-2 mt-4 white--text" color="blue-grey" v-on:click="gotoInfo()">
           투표 내역 확인
         </v-btn>
-        <v-btn class="mx-2 mt-4" color="info" v-on:click="gotoAnalyze()">
+        <v-btn class="mx-2 mt-4" color="secondary" v-on:click="gotoAnalyze()">
           투표 현황 분석
+        </v-btn>
+        <v-btn class="mx-2 mt-4" color="info" to="/endvote">
+          목록으로 돌아가기
         </v-btn>
       </template>
     </v-simple-table>
