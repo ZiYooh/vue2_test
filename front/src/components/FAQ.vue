@@ -1,8 +1,15 @@
 <template>
     <v-content class="mx-15">
-    <v-row justify="center" class="mt-5">
-      <h2 class="mb-3">자주 묻는 질문(FAQ)</h2>
-      <v-expansion-panels inset class="mx-10">
+    <v-card
+      outlined
+      class="mx-auto mt-5"
+      max-width="1500"
+    >
+      <v-col>
+        <h3 class="mt-3 ml-2">FAQ (자주 묻는 질문)</h3>
+      </v-col>
+      <v-divider class="mx-4 mb-5"></v-divider>
+      <v-expansion-panels class="mb-5 px-5">
         <v-expansion-panel>
           <v-expansion-panel-header>메타마스크 연동 방법</v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -35,7 +42,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
-    </v-row>
+    </v-card>
   </v-content>
 </template>
 
