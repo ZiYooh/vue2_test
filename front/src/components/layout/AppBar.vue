@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar absolute dense flat color="#0c1512" dark>
+    <v-app-bar absolute dense flat color="#222222" dark>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <router-link to="/">
       <v-img
