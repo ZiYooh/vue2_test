@@ -33,7 +33,7 @@
     <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon color="white" v-bind="attrs" v-on="on">
-            <v-icon>mdi-heart</v-icon>
+            <v-icon>mdi-animation</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -49,7 +49,7 @@
         <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon color="white" v-bind="attrs" v-on="on">
-            <v-icon>mdi-arrow-up-bold-box-outline</v-icon>
+            <v-icon>mdi-alert-box-outline</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -146,9 +146,6 @@
             <v-list-item-title>고객 센터</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/board">
-            <v-list-item-title>게시판테스트</v-list-item-title>
-          </v-list-item>
         </v-list-item-group>
       </v-list>
       </v-navigation-drawer>
