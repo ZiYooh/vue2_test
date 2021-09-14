@@ -1,62 +1,57 @@
 <template>
   <v-main>
-    <v-row>
-      <v-col md="6" class="mt-5 mx-auto">
-          <v-item-group>
-            <!-- <label for="subject">제목</label> -->
-            <v-card outlined dense >
-              {{result[0].subject}}
-            </v-card>
-            <!-- <v-text-field
-              outlined
-              dense
-              type="text"
-              v-model="subject"
-              class="form-control"
-              name="subject"
-              >
-            </v-text-field> -->
-          </v-item-group>
-          <v-item-group>
-            <!-- <label for="content">게시글 내용</label> -->
-            <v-card outlined dense height="250" >
-              {{result[0].content}}
-            </v-card>
-            <!-- <v-textarea
-              outlined
-              dense
-              height="175"
-              v-model="content"
-              class="form-control"
-              name="content"
-              placeholder="">
-              </v-textarea> -->
-          </v-item-group>          
-          <v-container>
-            <v-card style="width: 10%; float: left;">
-              <v-btn large block color="info" @click='toNotice' style='width:100px;float: left'>
-                목록
-              </v-btn>
-            </v-card>
-            <v-card style="width: 10%; float: right;">
-              <v-btn v-if="this.$store.state.user == 2" large block color="info" @click='sakjei' style='width:100px;float: right;'>
-                게시글 삭제
-              </v-btn>
-            </v-card>
-            <v-card style="width: 10%; float: middle;">
-              <v-btn v-if="this.$store.state.user == 2" large block color="info" @click='soojung(result[0])' style='width:100px;float: middle;'>
-                게시글 수정
-              </v-btn>
-            </v-card>
-    
-    </v-container>
-      </v-col>
-    </v-row>
+    <v-content class="mx-15">
+      <v-card
+        outlined
+        class="mx-auto mt-5"
+        max-width="1500"
+      >
+        <v-col>
+          <h3 class="mt-3 ml-2">공지사항</h3>
+        </v-col>
+        <v-divider class="mx-4"></v-divider>
+
+        <v-col>
+          <span class="mytitle mt-3 ml-2">제목: {{result[0].subject}}</span>
+        </v-col>
+        <v-divider class="mx-4"></v-divider>
+
+        <v-col>
+          <span class="ml-2">작성자: {{result[0].writer}}</span>
+        </v-col>
+        <v-divider class="mx-4"></v-divider>
+
+        <v-col>
+          <span class="ml-2">작성일: {{result[0].date}}</span>
+        </v-col>
+        <v-divider class="mx-4 mb-4"></v-divider>
+
+        <v-col>
+          <span class="ml-2">{{result[0].content}}</span>
+        </v-col>
+        <v-divider class="mx-4 mt-4 mb-4"></v-divider>
+        
+        <v-col class="mb-3 text-right">
+          <v-btn v-if="this.$store.state.user == 2" large color="error" @click='sakjei'>
+            게시글 삭제
+          </v-btn>
+          <v-btn v-if="this.$store.state.user == 2" large color="success" @click='soojung(result[0])'>
+            게시글 수정
+          </v-btn>
+          <v-btn large color="info" @click='toNotice'>
+            목록
+          </v-btn>
+        </v-col>
+      </v-card>
+    </v-content>
   </v-main>
 </template>
 
 <script>
 import axios from "axios";
+
+let i;
+
 //import router from "../router";
 
 
@@ -64,6 +59,7 @@ export default {
     data() {
 		return {
 			writes: [],
+      body: [],
       result : '',
 		};
 	},
@@ -72,14 +68,13 @@ export default {
 			this.writes = response.data;
       var id = this.$route.query;
       this.result = this.writes.filter(function(param){
-      return param._id === id;
-     });
-      //console.log(this.result[0]);
+        return param._id === id;
+      }
+    );
+      this.result[0].date = this.result[0].date.substring(0,10);
+      console.log(this.result[0]);
 		});
 	},
-  mounted(){
-   
-  },
 
   methods: {
     toNotice() {
@@ -93,7 +88,7 @@ export default {
         .then(() => {
           alert('삭제되었습니다.');
           this.$router.push({ name: "Notice" });
-         })
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -109,3 +104,10 @@ export default {
 };
 
 </script>
+
+<style>
+.mytitle {
+  font-weight: bold;
+  font-size: 18px;
+}
+</style>

@@ -15,40 +15,42 @@
         </v-carousel-item>
       </v-carousel>
     </v-card>
-      
+    
+    <!-- 최근 공지 카드 -->
     <v-card
       outlined
       class="mx-auto mt-5"
       max-width="1250"
     >
-    <h2 class="text-center mt-3 mb-3"> 최근 공지사항 </h2>
-    <v-simple-table class="" dense>
+    <h3 class="mt-3 ml-5 mb-4">최근 공지사항</h3>
+    <v-divider class="mx-4 mb-1"></v-divider>
+    <v-simple-table dense class="mx-4">
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">
+            <th class="text-center">
               번호
             </th>
-            <th class="text-left">
+            <th class="text-center">
               제목
             </th>
-            <th class="text-left">
+            <th class="text-center">
               작성자
             </th>
-            <th class="text-left">
+            <th class="text-center">
               작성일
             </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(write, index) in reverse" :key="write.id">
-						<td >{{ index + 1 }}</td>
+						<td class="text-center">{{ index + 1 }}</td>
             <!-- <td class="txt_left"><a href="javascript:;" @click="fnView(`${write.id}`)">{{write.subject}}</a></td> -->
-						<td v-on:click.stop="showCont(write)">{{ write.subject }}</td>
-						<td>관리자</td>
-						<td>{{ write._id }}</td>
+						<td v-on:click.stop="showCont(write)" style="cursor:pointer;">{{ write.subject }}</td>
+						<td class="text-center">{{ write.writer}}</td>
+						<td class="text-center">{{ write.date }}</td>
 					</tr>
-        </tbody>
+        </tbody>        
       </template>
     </v-simple-table>
     <v-col class="text-right">
@@ -56,11 +58,13 @@
     </v-col>
     </v-card>
 
+    <!-- 최근 투표 카드 -->
     <v-card
       outlined
       class="mx-auto mt-5"
       max-width="1250"
     >
+    <!--
     <h2 class="text-center mt-3 mb-3"> 최근 진행중인 투표 </h2>
     <v-simple-table class="" dense>
       <template v-slot:default>
@@ -94,6 +98,42 @@
         </tbody>
       </template>
     </v-simple-table>
+    -->
+    <h3 class="mt-3 ml-5 mb-4">최근 진행중인 투표</h3>
+    <v-divider class="mx-4 mb-1"></v-divider>
+    <v-simple-table dense class="mx-4">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-center">
+              번호
+            </th>
+            <th class="text-center">
+              투표 제목
+            </th>
+            <th class="text-center">
+              시작일
+            </th>
+            <th class="text-center">
+              종료일
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in votes" :key="item.id">
+						<td class="text-center">{{ index + 1 }}</td>
+            <td>
+            <router-link class="myclass" :to="{ name: 'NowVote', params: {code: item.voteCode} }">
+              {{ item.voteName }}
+            </router-link>
+            </td>
+            <td class="text-center">{{ item.startDate }}</td>
+						<td class="text-center">{{ item.endDate }}</td>
+					</tr>
+        </tbody>      
+      </template>
+    </v-simple-table>
+    
     <v-col class="text-right">
       <v-btn to="/votelist" depressed small color="#D3D3D3"> 더보기 </v-btn>
     </v-col>
@@ -129,6 +169,14 @@ let j = 4;
 
     computed: {
       reverse: function() {
+        for(i = 0; i < this.writes.length; i++){
+          this.writes[i].date = this.writes[i].date.substring(0,10);
+        }
+        for(i = 0; i < this.votes.length; i++){
+          this.votes[i].startDate = this.votes[i].startDate.substring(0,10);
+          this.votes[i].endDate = this.votes[i].endDate.substring(0,10);
+        }
+        
         if(this.writes.length > 5){
           for(i = 0; i < 5; i++) {
             this.final[i] = this.writes[i];
@@ -164,5 +212,9 @@ let j = 4;
 </script>
 
 <style scoped>
-
+.myclass{
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>

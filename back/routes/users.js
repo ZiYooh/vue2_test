@@ -19,6 +19,7 @@ users.post("/write", (req, res) => {
 	const userData = {
 		
 		subject: req.body.subject,
+		writer: req.body.writer,
 		content: req.body.content,
 		/*voteImage: req.body.voteImage,*/
 
@@ -52,6 +53,7 @@ users.post("/upd", (req, res) => {
 	const userData = {
 		
 		subject: req.body.subject,
+		writer: req.body.writer,
 		content: req.body.content,
 		/*voteImage: req.body.voteImage,*/
 
@@ -61,7 +63,8 @@ users.post("/upd", (req, res) => {
 		subject: req.body.oldsubject,
 	}, {
 		subject: req.body.subject,
-		content: req.body.content
+		content: req.body.content,
+		writer: req.body.writer,
 	})
 	.then((notice) => {
 		if (!notice) {

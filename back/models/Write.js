@@ -11,6 +11,9 @@ const UserSchema = new Schema({
 	content: {
 		type: String,
 	},
+	writer: {
+		type: String,
+	},
 	id: {
 		type: String,
 	},
