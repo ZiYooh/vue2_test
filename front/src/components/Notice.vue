@@ -29,32 +29,14 @@
 						<td>관리자</td>
 						<td>{{ write.date }}</td>
 					</tr>
-          
-          <tbody>
-				</tbody>
-          <!-- <tr>
-            <td>02</td>
-            <td>서버 점검 입니다</td>
-            <td>관리자</td>
-            <td>2021/01/02</td>
-          </tr>
-          <tr>
-            <td>01</td>
-            <td>공지사항 입니다</td>
-            <td>관리자</td>
-            <td>2021/01/01</td>
-          </tr> -->
-          
-          
-        </tbody>
-        
+        </tbody>        
       </template>
     </v-simple-table>
   </v-content>
   <div>
     <v-container>
       <v-card style="width: 10%; float: right;">
-        <v-btn large block color="info" @click="toWrite" style='width:20px;float: right;'>
+        <v-btn v-if="this.$store.state.user == 2" large block color="info" @click="toWrite" style='width:20px;float: right;'>
             게시글 등록
       </v-btn>
     </v-card>
