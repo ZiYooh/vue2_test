@@ -1,10 +1,15 @@
 <template>
   <v-main>
+    <v-content class="mx-15">
+		<v-card
+      class="mx-auto px-8 mt-7"
+      max-width="1000"
+    >
     <v-row>
-      <v-col md="6" class="mt-5 mx-auto">
+      <v-col class="mt-5 mx-auto">
         <v-form v-on:submit.prevent="registercomp">
           <h1 class="h3 mb-3 font-weight-normal">
-						Register As Company
+						회원가입 (기업회원)
 					</h1>
           <v-item-group>
             <label for="compName">기업명</label>
@@ -13,7 +18,7 @@
               v-model="compName"
               class="form-control"
               name="compName"
-              label="기업명"></v-text-field>
+              label="Company Name"></v-text-field>
             </v-item-group>
           <v-item-group>
             <label for="compNum">사업자등록번호</label>
@@ -22,7 +27,7 @@
               v-model="compNum"
               class="form-control"
               name="compNum"
-              label="사업자등록번호"></v-text-field> 
+              label="Business registration number"></v-text-field> 
           </v-item-group>
           <v-item-group>
             <label for="email">이메일</label>
@@ -31,7 +36,7 @@
               v-model="email"
               class="form-control"
               name="email"
-              label="이메일을 입력하세요"></v-text-field> 
+              label="Enter Your Email Address"></v-text-field> 
           </v-item-group>
           <v-item-group>
             <label for="email">비밀번호</label>
@@ -42,12 +47,14 @@
               name="password"
               label="Enter Your password"></v-text-field> 
           </v-item-group>
-          <v-btn large block color="primary" type="submit">
-            지금 등록하기
+          <v-btn class="mb-5" large block color="primary" type="submit">
+            회원가입
           </v-btn>
         </v-form>
       </v-col>
     </v-row>
+    </v-card>
+    </v-content>
   </v-main>
 </template>
 

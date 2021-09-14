@@ -1,7 +1,12 @@
 <template>
   <v-main>
+    <v-content class="mx-15">
+		<v-card
+      class="mx-auto px-8 mt-7"
+      max-width="1000"
+    >
     <v-row>
-      <v-col md="6" class="mt-5 mx-auto">
+      <v-col class="mt-5 mx-auto">
         <v-form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">
 						회원정보 수정
@@ -78,12 +83,14 @@
             prepend-icon="mdi-map"
             outlined
           ></v-select>
-          <v-btn large block color="primary" @click='update'>
+          <v-btn class="mb-5" large block color="primary" @click='update'>
             회원 정보 수정
           </v-btn>
         </v-form>
       </v-col>
     </v-row>
+    </v-card>
+    </v-content>
   </v-main>
 </template>
 

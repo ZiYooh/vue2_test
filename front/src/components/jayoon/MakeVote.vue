@@ -1,10 +1,15 @@
 <template>
   <v-main>
+    <v-content class="mx-15">
+		<v-card
+      class="mx-auto px-8 mt-7"
+      max-width="1000"
+    >
     <v-row>
-      <v-col md="6" class="mt-5 mx-auto">
+      <v-col class="mt-5 mx-auto">
         <v-form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">
-						원하는 투표를 설정하세요
+						투표 개설 신청 페이지
 					</h1>
           <v-item-group>
             <label for="voteName">투표 제목</label>
@@ -78,12 +83,14 @@
               name="description"
               placeholder="투표의 목적과 정보를 적으세요"></v-text-field>
           </v-item-group>
-          <v-btn large block color="info" type="submit">
-            투표 만들기!
+          <v-btn class="mb-5" large block color="info" type="submit">
+            신청
           </v-btn>
         </v-form>
       </v-col>
     </v-row>
+    </v-card>
+    </v-content>
   </v-main>
 </template>
 

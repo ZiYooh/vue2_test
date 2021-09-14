@@ -1,10 +1,15 @@
 <template>
   <v-main>
+    <v-content class="mx-15">
+		<v-card
+      class="mx-auto px-8 mt-7"
+      max-width="1000"
+    >
     <v-row>
-      <v-col md="6" class="mt-5 mx-auto">
+      <v-col class="mt-5 mx-auto">
         <v-form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">
-						Register An Account
+						회원가입 (일반회원)
 					</h1>
           <v-item-group>
             <label for="firstName">성</label>
@@ -78,12 +83,14 @@
             prepend-icon="mdi-map"
             outlined
           ></v-select>
-          <v-btn large block color="primary" type="submit">
-            Register Now
+          <v-btn class="mb-5" large block color="primary" type="submit">
+            회원가입
           </v-btn>
         </v-form>
       </v-col>
     </v-row>
+    </v-card>
+    </v-content>
   </v-main>
 </template>
 
