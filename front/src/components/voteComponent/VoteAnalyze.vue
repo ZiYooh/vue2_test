@@ -1,24 +1,36 @@
 <template>
-  <v-app>
-    <h1 class = "mb-3">투표정보 분석 페이지</h1>
-    <v-btn
+  <v-content class="mx-15">
+    <v-card
+      outlined
+      class="mx-auto mt-5"
+      max-width="1500"
+    >
+      <v-col>
+        <h3 class="mt-3 ml-2">투표 현황 분석</h3>
+      </v-col>
+      <v-divider class="mx-4"></v-divider>
+      <v-btn
+      block
       v-on:click="goBack()"
       color="success"
-      class="mx-auto mb-3"> 이전 페이지로 </v-btn>
-    <v-simple-table class="mx-auto">
+      class="mx-auto mt-5 mb-3"
+      >
+      이전 페이지로
+      </v-btn>
+    <v-simple-table class="mx-4">
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-center">
+            <th class="text-center" id="myhead">
               후보자
             </th>
-            <th class="text-center">
+            <th class="text-center" id="myhead">
               성별 분석
             </th>
-            <th class="text-center">
+            <th class="text-center" id="myhead">
               지역별 분석
             </th>
-            <th class="text-center">
+            <th class="text-center" id="myhead">
               나이대별 분석
             </th>
           </tr>
@@ -28,15 +40,16 @@
             v-for="item in resultsWithGraphs"
             v-bind:key="item"
           >
-            <td>{{item.title}}</td>
-            <td><pie-chart :chart-data="item.sex"></pie-chart></td>
-            <td><bar-chart :chart-data="item.location"></bar-chart></td>
-            <td><bar-chart :chart-data="item.age"></bar-chart></td>
+            <td class="text-center">{{item.title}}</td>
+            <td class="text-center"><pie-chart :chart-data="item.sex"></pie-chart></td>
+            <td class="text-center"><bar-chart :chart-data="item.location"></bar-chart></td>
+            <td class="text-center"><bar-chart :chart-data="item.age"></bar-chart></td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-  </v-app>
+    </v-card>
+  </v-content>
 </template>
 
 <script>
@@ -270,5 +283,9 @@ export default {
 </script>
 
 <style>
-
+#myhead{
+  font-size: 14px;
+  text-align: center;
+  color: black;
+}
 </style>
