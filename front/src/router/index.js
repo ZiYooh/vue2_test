@@ -12,7 +12,6 @@ import Update from '@/components/Update';
 import ContPage from '@/components/ContPage';
 import Help from '@/components/Help';
 import FAQ from '@/components/FAQ';
-import QNA from '@/components/QNA';
 import Endvote from '@/components/Endvote';
 import Board from '@/components/Board';
 import VoteList from '@/components/VoteList';
@@ -30,7 +29,10 @@ import UserListcomp from '@/components/jayoon/UserListcomp';
 import NowVote from '@/components/voteComponent/NowVote';
 import VoterInfo from '@/components/voteComponent/VoterInfo';
 import VoteAnalyze from '@/components/voteComponent/VoteAnalyze';
-
+import QNA from '@/components/QNA';
+import QNAWrite from '@/components/QNAWrite';
+import QNAContPage from '@/components/QNAContPage';
+import QNAUpdate from '@/components/QNAUpdate';
 
 Vue.use(Router);
 
@@ -100,11 +102,6 @@ export default new Router({
       path: '/faq',
       name: 'FAQ',
       component: FAQ,
-    },
-    {
-      path: '/qna',
-      name: 'QNA',
-      component: QNA,
     },
     {
       path: '/endvote',
@@ -185,6 +182,26 @@ export default new Router({
       path: '/voteanalyze/:code',
       name: 'VoteAnalyze',
       component: VoteAnalyze,
+    },
+    {
+      path: '/qna',
+      name: 'QNA',
+      component: QNA,
+    },
+    {
+      path: '/qnawrite',
+      name: 'QNAWrite',
+      component: QNAWrite,
+    },
+    {
+      path: '/qnacontpage',
+      name: 'QNAContPage',
+      component: QNAContPage,
+    },
+    {
+      path: '/qnaupdate',
+      name: 'QNAUpdate',
+      component: QNAUpdate,
     },
   ],
 });

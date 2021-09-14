@@ -68,9 +68,9 @@ export default {
   created() {
 		axios.get("http://localhost:5000/users/getprofile").then((response) => {
 			this.profile = response.data;
-       var email = this.email;
-       this.result = this.profile.filter(function(param){
-       return param.email === email;
+        var email = this.email;
+        this.result = this.profile.filter(function(param){
+        return param.email === email;
       });
       console.log(this.result[0]);
 		});

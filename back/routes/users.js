@@ -9,11 +9,13 @@ const Usercomp = require("../models/Usercomp");
 const Vote = require("../models/Vote");
 const VoteResult = require("../models/VoteResult");
 const Write = require("../models/Write");
+const QnAWrite = require("../models/QnAWrite");
 const { ReplSet } = require("mongodb");
 users.use(cors());
 
 process.env.SECRET_KEY = "secret";
 
+// 공지사항 작성 처리
 users.post("/write", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -48,6 +50,7 @@ users.post("/write", (req, res) => {
 		});
 });
 
+// 공지사항 수정 처리
 users.post("/upd", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -85,6 +88,78 @@ users.post("/upd", (req, res) => {
 	});
 });
 
+// QnA 작성 처리
+users.post("/qnawrite", (req, res) => {
+	const today = new Date();
+	const userData = {
+		
+		subject: req.body.subject,
+		writer: req.body.writer,
+		content: req.body.content,
+		answer: req.body.answer,
+		created: today,
+	};
+
+	QnAWrite.findOne({
+		subject: req.body.subject,
+	})
+		.then((notice) => {
+			if (!notice) {
+				QnAWrite.create(userData)
+						.then((noticer) => {
+							res.json({ status: "write success" });
+						})
+						.catch((err) => {
+							res.send("error: " + err);
+						});
+				
+			} else {
+				res.json({ error: " already exists" });
+			}
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+users.post("/qnaupd", (req, res) => {
+	const today = new Date();
+	const userData = {
+		
+		subject: req.body.subject,
+		writer: req.body.writer,
+		content: req.body.content,
+		/*voteImage: req.body.voteImage,*/
+
+		created: today,
+	};
+	QnAWrite.updateOne({
+		subject: req.body.oldsubject,
+	}, {
+		subject: req.body.subject,
+		content: req.body.content,
+		writer: req.body.writer,
+	})
+	.then((notice) => {
+		if (!notice) {
+			QnAWrite.create(userData)
+					.then((noticer) => {
+						res.json({ status: "write success" });
+					})
+					.catch((err) => {
+						res.send("error: " + err);
+					});
+			
+		} else {
+			res.json({ error: " already exists" });
+		}
+	})
+	.catch((err) => {
+		res.send("error: " + err);
+	});
+});
+
+// 개인정보 수정 처리
 users.post("/modp", (req, res) => {
 	const userData = {
 		/*voteImage: req.body.voteImage,*/
@@ -118,6 +193,7 @@ users.post("/modp", (req, res) => {
 	});
 });
 
+// 목록 가져오는 처리
 users.get("/getlist", (req, res) => {
 	Write.find()
 		.then((result) => {
@@ -128,6 +204,19 @@ users.get("/getlist", (req, res) => {
 		});
 });
 
+// QnA 목록 가져오는 처리
+users.get("/getqnalist", (req, res) => {
+	QnAWrite.find()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+
+// 프로필 정보 가져오는 처리
 users.get("/getprofile", (req, res) => {
 	User.find()
 		.then((result) => {
@@ -138,6 +227,7 @@ users.get("/getprofile", (req, res) => {
 		});
 });
 
+// 글 삭제하는 처리
 users.post("/del", (req, res) => {
 	const userData = {
 		_id: req.body._id,
@@ -163,10 +253,37 @@ users.post("/del", (req, res) => {
 		.catch((err) => {
 			res.send("error: " + err);
 		});
-
 });
 
+// QnA 글 삭제하는 처리
+users.post("/qnadel", (req, res) => {
+	const userData = {
+		_id: req.body._id,
+	};
 
+	QnAWrite.deleteOne({
+		_id: req.body._id,
+	})
+		.then((notice) => {
+				if (!notice) {
+					QnAWrite.create(userData)
+							.then((noticer) => {
+								res.json({ status: "delete success" });
+							})
+							.catch((err) => {
+								res.send("error: " + err);
+							});
+					
+				} else {
+					res.json({ error: " already exists" });
+				}
+			})
+		.catch((err) => {
+			res.send("error: " + err);
+		});
+});
+
+// 회원가입 하는 처리
 users.post("/register", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -206,6 +323,7 @@ users.post("/register", (req, res) => {
 		});
 });
 
+// 기업회원 가입하는 처리
 users.post("/registercomp", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -242,6 +360,7 @@ users.post("/registercomp", (req, res) => {
 		});
 });
 
+// 투표 개설 신청하는 처리
 users.post("/makevote", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -281,6 +400,7 @@ users.post("/makevote", (req, res) => {
 		});
 });
 
+// 로그인 처리
 users.post("/login", (req, res) => {
 	User.findOne({
 		email: req.body.email,
@@ -318,6 +438,7 @@ users.post("/login", (req, res) => {
 		});
 });
 
+// 기업회원 로그인 처리
 users.post("/logincomp", (req, res) => {
 	Usercomp.findOne({
 		email: req.body.email,
@@ -351,6 +472,7 @@ users.post("/logincomp", (req, res) => {
 		});
 });
 
+// 투표결과 처리
 users.post("/voteresult", (req, res) => {
 	const today = new Date();
 	const userData = {
@@ -372,6 +494,7 @@ users.post("/voteresult", (req, res) => {
 		});
 });
 
+// 유저목록 가져오는 처리
 users.get("/userlist", (req, res) => {
 	User.find()
 		.then((result) => {
@@ -381,6 +504,8 @@ users.get("/userlist", (req, res) => {
 			res.send("error: " + err);
 		});
 });
+
+// 기업회원 목록 가져오는 처리
 users.get("/userlistcomp", (req, res) => {
 	Usercomp.find()
 		.then((result) => {
@@ -391,6 +516,7 @@ users.get("/userlistcomp", (req, res) => {
 		});
 });
 
+// 투표목록 가져오는 처리
 users.get("/votelist", (req, res) => {
 	Vote.find()
 		.then((result) => {
@@ -401,6 +527,7 @@ users.get("/votelist", (req, res) => {
 		});
 });
 
+// 투표결과 가져오는 처리
 users.get("/voteresult", (req, res) => {
 	VoteResult.find()
 		.then((result) => {
