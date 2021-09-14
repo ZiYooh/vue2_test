@@ -11,6 +11,7 @@
     </span><br><br>
     <v-btn
       text
+      to="/"
     >
       처음으로
     </v-btn>
