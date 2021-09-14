@@ -91,7 +91,10 @@ export default {
       this.$router.push({ name: "QNA"});
 		},
     sakjei() {
-      axios
+      if(!confirm('정말로 삭제 하시겠습니까?')){
+        alert('취소되었습니다.');
+      } else {
+        axios
         .post("http://localhost:5000/users/qnadel", {
           _id: this.$route.query,
         })
@@ -102,6 +105,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+      }
     },
     soojung(param) {
       this.$router.push({ name: "QNAUpdate" , query: param});
