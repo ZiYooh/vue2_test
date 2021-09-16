@@ -1,7 +1,10 @@
+/*
 const Hello = artifacts.require("Hello"); // artifacts.require 가 build 폴더 안에있는 Lottery 데이터 가지고옴 
 const SANGSU = artifacts.require("SANGSU");
 const TESTONE = artifacts.require("TESTONE");
 const FINISHTEST = artifacts.require("FINISHTEST");
+*/
+const PNUTEST = artifacts.require("PNUTEST");
 
 module.exports = function(deployer) { 
 	/*
@@ -18,5 +21,8 @@ module.exports = function(deployer) {
 	var options4 = ['A연습생', 'B연습생', 'C연습생', 'D연습생', 'E연습생', 'F연습생'];
 	deployer.deploy(FINISHTEST, options4.map(name => web3.utils.utf8ToHex(name))); // bytecode를 가지고 와 deployer 배포 (deploy) 해줌 
 	*/
-	
+
+	var options5 = ['대상1', '대상2', '대상3'];
+	deployer.deploy(PNUTEST, options5.map(name => web3.utils.utf8ToHex(name))); // bytecode를 가지고 와 deployer 배포 (deploy) 해줌 
+
 };
