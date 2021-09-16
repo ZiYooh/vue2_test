@@ -97,6 +97,21 @@
     </v-row>
     </v-container>
     </v-card>
+
+    <v-snackbar
+      v-model="snackbar"
+      color="success"
+      timeout="9999999"
+    >
+    <div class="text-center">
+      확인 버튼을 누른 후 투표 결과가 반영되기까지 시간이 소요됩니다. <br>
+      투표 완료까지 페이지를 벗어나지 말아주세요.
+      완료 시 자동으로 새로고침 됩니다. <br>
+        <v-progress-circular
+          indeterminate
+        ></v-progress-circular>
+    </div>
+    </v-snackbar>
   </v-content>
 </template>
 
@@ -142,6 +157,8 @@ export default {
 			sex: decoded.sex,
       age: decoded.age,
 			location: decoded.location,
+
+      snackbar: false,
 
       chartOptions: {
         scales: {
@@ -207,7 +224,8 @@ export default {
         alert("투표는 일반회원만 가능합니다");
         return;
       }
-
+      
+      this.snackbar = true;
       await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 2500000, from: this.account });
       this.voteInfotransfer(this.picked);
     },
@@ -218,7 +236,8 @@ export default {
         datasets: [
           {
             label: '투표수',
-            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899", "#4682B4", "#800000", "#000000",
+                              "#87CEFA", "#F08080", "#98FB98", "#D2691E", "#483D8B", "#2F4F4F", "#6495ED", "#A0522D"],
             data: this.votes,
           },
         ],
@@ -229,7 +248,8 @@ export default {
         datasets: [
           {
             borderWidth: 5,
-            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899", "#4682B4", "#800000", "#000000",
+                              "#87CEFA", "#F08080", "#98FB98", "#D2691E", "#483D8B", "#2F4F4F", "#6495ED", "#A0522D"],
             data: this.votes,
           },
         ],

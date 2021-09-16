@@ -117,7 +117,7 @@ export default {
 
   methods: {
     openEtherScan(address) {
-      window.open('https://etherscan.io/address/'+ address);
+      window.open('https://ropsten.etherscan.io/address/'+ address);
     },
     goBack() {
       this.$router.push({ name: 'NowVote', params: {code: this.code} });

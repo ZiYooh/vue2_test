@@ -4,6 +4,8 @@ const TESTONE = artifacts.require("TESTONE");
 const FINISHTEST = artifacts.require("FINISHTEST");
 
 module.exports = function(deployer) { 
+	/*
+	<=== 배포 완료된 컨트랙트들 ===>
 	var options = ['오징어버거', '라이스버거', '유러피언프리코치즈버거', '텐더그릴치킨버거'];
 	deployer.deploy(Hello, options.map(name => web3.utils.utf8ToHex(name))); // bytecode를 가지고 와 deployer 배포 (deploy) 해줌 
 
@@ -15,4 +17,6 @@ module.exports = function(deployer) {
 
 	var options4 = ['A연습생', 'B연습생', 'C연습생', 'D연습생', 'E연습생', 'F연습생'];
 	deployer.deploy(FINISHTEST, options4.map(name => web3.utils.utf8ToHex(name))); // bytecode를 가지고 와 deployer 배포 (deploy) 해줌 
+	*/
+	
 };

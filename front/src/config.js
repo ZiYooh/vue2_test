@@ -18,5 +18,5 @@ export default {
   FINISHTEST_CA: FINISHTEST.networks[3].address,
   FINISHTEST_ABI: FINISHTEST.abi,
 
-  GAS_AMOUNT: 1000000,
+  GAS_AMOUNT: 5500000,
 };

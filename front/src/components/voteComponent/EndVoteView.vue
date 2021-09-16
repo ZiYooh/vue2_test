@@ -60,7 +60,7 @@
     <v-divider class="mx-4 mt-3 mb-4"></v-divider>
     <v-container class="grey lighten-5">
     <v-row>
-      <bar-chart :chart-data="dataCollection"></bar-chart>
+      <bar-chart :chart-data="dataCollection" :options="chartOptions"></bar-chart>
       <v-spacer></v-spacer>
       <pie-chart :chart-data="dataCollection2"></pie-chart>
     </v-row>
@@ -111,11 +111,22 @@ export default {
 			sex: decoded.sex,
       age: decoded.age,
 			location: decoded.location,
+
+      chartOptions: {
+        scales: {
+          yAxes: [{
+            display: true, // y축 기준 표시 여부
+            ticks: { // y축 기준 데이터 변경
+              beginAtZero: true,
+            },
+          }],
+        }, // scales 끝
+      },
     };
   },
   created() {
     this.code = this.$route.params.code;
-    axios.get("http://localhost:5000/users/votelist").then((response) => {
+    axios.get("http://localhost:5000/users/endvotelist").then((response) => {
 			this.rVotes = response.data;
       for (i = 0; i < this.rVotes.length; i++){
         console.log('For문 들어왔다');
@@ -166,7 +177,8 @@ export default {
         datasets: [
           {
             label: '투표수',
-            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899", "#4682B4", "#800000", "#000000",
+                              "#87CEFA", "#F08080", "#98FB98", "#D2691E", "#483D8B", "#2F4F4F", "#6495ED", "#A0522D"],
             data: this.votes,
           },
         ],
@@ -177,7 +189,8 @@ export default {
         datasets: [
           {
             borderWidth: 5,
-            backgroundColor: ["#F48FB1", "#AAAAAA", "#D81B60", "#1E88E5", "#FDD835"],
+            backgroundColor: ["#1E88E5", "#D81B60", "#3CB371", "#DAA520", "#8B008B", "#778899", "#4682B4", "#800000", "#000000",
+                              "#87CEFA", "#F08080", "#98FB98", "#D2691E", "#483D8B", "#2F4F4F", "#6495ED", "#A0522D"],
             data: this.votes,
           },
         ],
