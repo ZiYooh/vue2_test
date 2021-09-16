@@ -211,6 +211,7 @@ export default {
       this.results.push({ title: this.optionsAscii[i], count: this.votes[i] });
     }
     this.fillData();
+
   },
 
   methods: {
@@ -225,6 +226,11 @@ export default {
         return;
       }
       
+      if(await this.contractInstance.methods.isVoted(this.account).call() == true){
+        alert("이미 해당 투표에 투표하셨습니다.");
+        return;
+      }
+
       this.snackbar = true;
       await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 2500000, from: this.account });
       this.voteInfotransfer(this.picked);

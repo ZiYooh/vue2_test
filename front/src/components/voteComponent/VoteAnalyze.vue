@@ -287,7 +287,8 @@ export default {
     },
 
     goBack() {
-      this.$router.push({ name: 'NowVote', params: {code: this.code} });
+      //this.$router.push({ name: 'NowVote', params: {code: this.code} });
+      this.$router.go(-1);
     },
   },
 }
