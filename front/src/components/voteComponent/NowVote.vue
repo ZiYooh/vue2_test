@@ -208,7 +208,7 @@ export default {
         return;
       }
 
-      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 500000, from: this.account });
+      await this.contractInstance.methods.voting(this.$web3.utils.utf8ToHex(this.picked)).send({ gas: 2500000, from: this.account });
       this.voteInfotransfer(this.picked);
     },
 
