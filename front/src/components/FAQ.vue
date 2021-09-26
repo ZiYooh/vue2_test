@@ -11,9 +11,23 @@
       <v-divider class="mx-4 mb-5"></v-divider>
       <v-expansion-panels class="mb-5 px-5">
         <v-expansion-panel>
+          <v-expansion-panel-header>블록체인 투표 진행 전 준비사항</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            해당 플랫폼의 블록체인 기반 투표 기능은 투표 시행전에 투표자들이 개인의 이더리움 지갑을 Metamask를 통해 개설한 상태에서 사이트에 접근하는 방식이기 때문에,<br>
+            Metamask를 통한 개인의 이더리움 지갑 개설이 선행되어야 합니다.<br>
+            1. 크롬 확장 프로그램 Metamask를 설치하고<br>
+            2. Metamask를 통해 지갑을 개설한 후<br>
+            회원가입과 로그인을 통해 투표 기능을 이용해주시기 바랍니다<br><br>
+
+            Metamask 설치 링크 : <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?utm_source=chrome-ntp-icon" target="_blank">https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?utm_source=chrome-ntp-icon </a><br>
+            Metamask 개설 가이드 : <a href="https://blog.naver.com/PostView.nhn?blogId=hak3210&logNo=222274726326" target="_blank"> https://blog.naver.com/PostView.nhn?blogId=hak3210&logNo=222274726326</a><br>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
           <v-expansion-panel-header>메타마스크 연동 방법</v-expansion-panel-header>
           <v-expansion-panel-content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            1) 브라우저 우측 상단의 메타마스크 버튼을 클릭합니다. <br>
+            2) 입니다.
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
